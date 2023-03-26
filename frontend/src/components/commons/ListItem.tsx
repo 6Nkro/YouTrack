@@ -9,11 +9,11 @@ interface ListItemProps {
   onClick: MouseEventHandler<HTMLElement>;
 }
 
-const ListItem = (props: ListItemProps) => (
+const ListItem = ({ icon, text, onClick }: ListItemProps) => (
   <div style={{ overflowX: "hidden" }}>
-    <ListItemButton key={props.text} onClick={props.onClick}>
-      <ListItemIcon>{props.icon}</ListItemIcon>
-      <ListItemText primary={props.text} />
+    <ListItemButton key={text} onClick={onClick}>
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primary={text} />
     </ListItemButton>
   </div>
 );

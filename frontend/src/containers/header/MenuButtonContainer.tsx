@@ -9,7 +9,7 @@ const MenuButtonContainer = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSideBarToggle = () => {
-    dispatch(toggleSideBar());
+    dispatch(toggleSideBar);
   };
 
   return (

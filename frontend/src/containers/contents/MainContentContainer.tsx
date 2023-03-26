@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Toolbar, Typography } from "@mui/material";
+import { Box, Toolbar } from "@mui/material";
+import YouTubeSearchResultContainer from "./YouTubeSearchResultContainer";
 
 const MainContentContainer = () => {
   return (
@@ -10,9 +11,7 @@ const MainContentContainer = () => {
       }}
     >
       <Toolbar />
-      <Typography variant="h6" component="div">
-        Main Content
-      </Typography>
+      <YouTubeSearchResultContainer />
     </Box>
   );
 };
