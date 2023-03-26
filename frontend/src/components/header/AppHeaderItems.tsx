@@ -1,8 +1,8 @@
 import React from "react";
 import { Toolbar, Box, AppBar } from "@mui/material";
-import MenuButtonContainer from "../../containers/header/MenuButtonContainer";
-import AppTitleContainer from "../../containers/header/AppTitleContainer";
+import HamburgerContainer from "../../containers/header/HamburgerContainer";
 import YouTubeSearchBarContainer from "../../containers/header/YouTubeSearchBarContainer";
+import AppTitle from "./AppTitle";
 
 interface AppHeaderItemsProps {
   nightMode: boolean;
@@ -22,10 +22,15 @@ const AppHeaderItems = ({ nightMode }: AppHeaderItemsProps) => (
     }}
   >
     <Toolbar>
-      <MenuButtonContainer />
-      <AppTitleContainer />
-      <Box sx={{ flexGrow: 1 }} />
-      <YouTubeSearchBarContainer />
+      <Box sx={{ flexGrow: 0 }}>
+        <HamburgerContainer />
+      </Box>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppTitle text="YouTrack" nightMode={nightMode} />
+      </Box>
+      <Box sx={{ flexGrow: 1 }}>
+        <YouTubeSearchBarContainer />
+      </Box>
       <Box sx={{ flexGrow: 1 }} />
     </Toolbar>
   </AppBar>

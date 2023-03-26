@@ -5,11 +5,11 @@ import { toggleSideBar } from "../../redux/slices/commonSlice";
 import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from "@mui/material";
 
-const MenuButtonContainer = () => {
+const HamburgerContainer = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSideBarToggle = () => {
-    dispatch(toggleSideBar);
+    dispatch(toggleSideBar());
   };
 
   return (
@@ -19,4 +19,4 @@ const MenuButtonContainer = () => {
   );
 };
 
-export default MenuButtonContainer;
+export default HamburgerContainer;

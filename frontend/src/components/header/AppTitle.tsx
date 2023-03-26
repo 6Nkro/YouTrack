@@ -13,7 +13,13 @@ const AppTitle = ({ text, nightMode }: AppTitleProps) => (
     startIcon={<VideoLibraryIcon sx={{ color: "red" }} />}
     sx={{ textTransform: "none" }}
   >
-    <Typography variant="h6" sx={{ color: nightMode ? "white" : "black" }}>
+    <Typography
+      variant="h6"
+      sx={{
+        color: nightMode ? "white" : "black",
+        fontWeight: "600",
+      }}
+    >
       {text}
     </Typography>
   </Button>

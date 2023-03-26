@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useYouTubeSearch } from "../../hooks/useYouTubeSearch";
+import YouTubeSearchResultCard from "../../components/contents/YouTubeSearchResultCard";
 
 const YouTubeSearchResultContainer = () => {
   const searchResult = useYouTubeSearch();
@@ -22,11 +23,11 @@ const YouTubeSearchResultContainer = () => {
   console.log(data);
 
   return (
-    <div>
+    <>
       {data.items.map((item: any) => (
-        <div key={item.id}>{item.snippet.title}</div>
+        <YouTubeSearchResultCard key={item.id.videoId} snippet={item.snippet} />
       ))}
-    </div>
+    </>
   );
 };
 
