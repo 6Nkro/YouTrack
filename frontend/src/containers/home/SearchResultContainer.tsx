@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useYouTubeSearch } from "../../hooks/useYouTubeSearch";
-import SearchResultCard from "../../components/contents/SearchResultCard";
+import SearchResultCard from "../../components/home/SearchResultCard";
 import { tmpData } from "../../utils/tmpData";
-import SearchResultCardContainer from "./SearchResultCardContainer";
+import HomeContentsContainer from "./HomeContentsContainer";
 
-const YouTubeSearchResultContainer = () => {
+const SearchResultContainer = () => {
   // const searchResult = useYouTubeSearch();
   // const { data, isLoading, isError, refetch } = searchResult;
   //
@@ -26,7 +26,7 @@ const YouTubeSearchResultContainer = () => {
 
   console.log(data);
 
-  return <SearchResultCardContainer data={data} />;
+  return <HomeContentsContainer data={data} />;
 };
 
-export default YouTubeSearchResultContainer;
+export default SearchResultContainer;

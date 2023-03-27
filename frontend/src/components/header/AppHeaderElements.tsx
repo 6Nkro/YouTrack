@@ -11,38 +11,42 @@ import {
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import { IconTextButton } from "../commons/CustomButton";
 
 interface HamburgerProps {
   onClick: MouseEventHandler<HTMLElement>;
 }
 
 export const Hamburger: React.FC<HamburgerProps> = ({ onClick }) => (
-  <IconButton edge="start" sx={{ mr: 2 }} onClick={onClick}>
-    <MenuIcon />
-  </IconButton>
+  <IconButton
+    children={<MenuIcon />}
+    edge="start"
+    sx={{ mr: 2 }}
+    onClick={onClick}
+  />
 );
 
 export const AppTitle: React.FC<{ text: string }> = ({ text }) => {
-  const isNightMode = useTheme().palette.mode === "dark";
   const navigate = useNavigate();
+  const textColor = useTheme().palette.mode === "dark" ? "white" : "black";
+  const textElement = (
+    <Typography
+      variant="h6"
+      sx={{
+        color: textColor,
+        fontWeight: "600",
+      }}
+    >
+      {text}
+    </Typography>
+  );
 
   return (
-    <Button
-      variant="text"
-      startIcon={<VideoLibraryIcon sx={{ color: "red" }} />}
-      sx={{ textTransform: "none", mr: 2 }}
+    <IconTextButton
+      icon={<VideoLibraryIcon sx={{ color: "red" }} />}
+      text={textElement}
       onClick={() => navigate("/")}
-    >
-      <Typography
-        variant="h6"
-        sx={{
-          color: isNightMode ? "white" : "black",
-          fontWeight: "600",
-        }}
-      >
-        {text}
-      </Typography>
-    </Button>
+    />
   );
 };
 

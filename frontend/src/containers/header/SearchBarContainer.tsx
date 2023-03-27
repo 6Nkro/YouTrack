@@ -3,7 +3,7 @@ import { useQueryClient } from "react-query";
 import { getSearchResult } from "../../services/YouTubeSearchService";
 import { SearchBar } from "../../components/header/AppHeaderElements";
 
-const YouTubeSearchBarContainer = () => {
+const SearchBarContainer = () => {
   const [value, setValue] = useState("");
   const queryClient = useQueryClient();
 
@@ -21,4 +21,4 @@ const YouTubeSearchBarContainer = () => {
   );
 };
 
-export default YouTubeSearchBarContainer;
+export default SearchBarContainer;

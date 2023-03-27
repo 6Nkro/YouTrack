@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import SearchResultCard from "../../components/contents/SearchResultCard";
-import SelectedCard from "../../components/contents/SelectedCard";
+import React, { useState } from "react";
+import SearchResultCard from "../../components/home/SearchResultCard";
+import SelectedCard from "../../components/home/SelectedCard";
 
-const SearchResultCardContainer: React.FC<{ data: any }> = ({ data }) => {
+const HomeContentsContainer: React.FC<{ data: any }> = ({ data }) => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const handleCardClick = (id: string | null) => {
@@ -27,4 +27,4 @@ const SearchResultCardContainer: React.FC<{ data: any }> = ({ data }) => {
   );
 };
 
-export default SearchResultCardContainer;
+export default HomeContentsContainer;

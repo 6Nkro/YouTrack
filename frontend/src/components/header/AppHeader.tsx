@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from "react";
 import { Box, AppBar, useTheme } from "@mui/material";
 import { AppTitle, Hamburger } from "./AppHeaderElements";
-import YouTubeSearchBarContainer from "../../containers/header/YouTubeSearchBarContainer";
+import SearchBarContainer from "../../containers/header/SearchBarContainer";
 
 interface AppHeaderItemsProps {
   toggleSideBar: MouseEventHandler<HTMLElement>;
@@ -24,7 +24,7 @@ const AppHeader: React.FC<AppHeaderItemsProps> = ({ toggleSideBar }) => {
           <AppTitle text="YouTrack" />
         </Box>
         <Box sx={{ flexGrow: 1.2 }}>
-          <YouTubeSearchBarContainer />
+          <SearchBarContainer />
         </Box>
       </Box>
     </AppBar>

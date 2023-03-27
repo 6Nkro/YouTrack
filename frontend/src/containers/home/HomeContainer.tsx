@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
-import YouTubeSearchResultContainer from "./YouTubeSearchResultContainer";
+import SearchResultContainer from "./SearchResultContainer";
 
 const HomeContainer = () => {
   return (
@@ -13,7 +13,7 @@ const HomeContainer = () => {
         p: 3,
       }}
     >
-      <YouTubeSearchResultContainer />
+      <SearchResultContainer />
     </Box>
   );
 };

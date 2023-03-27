@@ -6,12 +6,9 @@ import {
   CardMedia,
   Box,
 } from "@mui/material";
-import {
-  ThumbNail,
-  Title,
-  ChannelTitle,
-  DisplayDate,
-} from "./VideoInfoElements";
+import { ThumbNail } from "../commons/VideoInfoElements";
+import { LineClampText, EllipsisText } from "../commons/CustomTypography";
+import { timeAgo } from "../../utils/timeAgo";
 
 interface YouTubeSearchResultCardProps {
   snippet: any;
@@ -32,9 +29,17 @@ const SearchResultCard: React.FC<YouTubeSearchResultCardProps> = ({
             <ThumbNail url={thumbnails.medium.url} title={title} />
           </CardMedia>
           <CardContent sx={{ pt: 1 }}>
-            <Title text={title} lineClamp={2} />
-            <ChannelTitle text={channelTitle} />
-            <DisplayDate text={publishedAt} />
+            <LineClampText variant="h6" text={title} lineClamp={2} />
+            <EllipsisText
+              text={channelTitle}
+              variant="subtitle1"
+              color="text.secondary"
+            />
+            <EllipsisText
+              text={timeAgo(publishedAt)}
+              variant="subtitle2"
+              color="text.secondary"
+            />
           </CardContent>
         </Box>
       </CardActionArea>

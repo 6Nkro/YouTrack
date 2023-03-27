@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from "react";
-import { Drawer, useTheme } from "@mui/material";
+import { Drawer } from "@mui/material";
 import { HomeButton, PlayListButton, NightModeButton } from "./SideBarElements";
 
 interface SideBarProps {
