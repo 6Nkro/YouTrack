@@ -1,5 +1,5 @@
-import SearchResultCard from "../../components/contents/SearchResultCard";
 import React, { useEffect, useState } from "react";
+import SearchResultCard from "../../components/contents/SearchResultCard";
 import SelectedCard from "../../components/contents/SelectedCard";
 
 const SearchResultCardContainer: React.FC<{ data: any }> = ({ data }) => {
@@ -8,10 +8,6 @@ const SearchResultCardContainer: React.FC<{ data: any }> = ({ data }) => {
   const handleCardClick = (id: string | null) => {
     setSelectedId(selectedId !== id ? id : null);
   };
-
-  useEffect(() => {
-    console.log(selectedId);
-  }, [selectedId]);
 
   return (
     <>

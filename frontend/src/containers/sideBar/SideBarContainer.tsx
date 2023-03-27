@@ -1,31 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import SideBar from "../../components/sideBar/SideBar";
 import { toggleNightMode } from "../../redux/slices/commonSlice";
+import SideBar from "../../components/sideBar/SideBar";
 
 const SideBarContainer = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const isOpen = useSelector((state: RootState) => state.common.sideBar);
-
-  const handleHomeClick = () => {
-    console.log("HomeContainer button clicked");
-  };
-
-  const handlePlaylistClick = () => {
-    console.log("Playlist button clicked");
-  };
-
-  const handleNightModeToggle = () => {
-    dispatch(toggleNightMode());
-  };
 
   return (
     <SideBar
       isOpen={isOpen}
-      homeClick={handleHomeClick}
-      playListClick={handlePlaylistClick}
-      nightModeToggle={handleNightModeToggle}
+      homeClick={() => navigate("/")}
+      playListClick={() => navigate("/playList")}
+      nightModeToggle={() => dispatch(toggleNightMode())}
     />
   );
 };

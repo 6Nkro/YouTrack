@@ -1,8 +1,8 @@
 import React from "react";
-import { Box, Toolbar } from "@mui/material";
+import { Box } from "@mui/material";
 import YouTubeSearchResultContainer from "./YouTubeSearchResultContainer";
 
-const MainContentContainer = () => {
+const HomeContainer = () => {
   return (
     <Box
       component="main"
@@ -13,10 +13,9 @@ const MainContentContainer = () => {
         p: 3,
       }}
     >
-      <Toolbar />
       <YouTubeSearchResultContainer />
     </Box>
   );
 };
 
-export default MainContentContainer;
+export default HomeContainer;

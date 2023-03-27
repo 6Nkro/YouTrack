@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from "react";
-import { Drawer, Toolbar } from "@mui/material";
+import { Drawer, useTheme } from "@mui/material";
 import { HomeButton, PlayListButton, NightModeButton } from "./SideBarElements";
 
 interface SideBarProps {
@@ -26,10 +26,10 @@ const SideBar: React.FC<SideBarProps> = ({
         "& .MuiDrawer-paper": {
           width: isOpen ? drawerWidth : 60,
           boxSizing: "border-box",
+          pt: 10,
         },
       }}
     >
-      <Toolbar sx={{ mb: 2 }} />
       <HomeButton onClick={homeClick} />
       <PlayListButton onClick={playListClick} />
       <NightModeButton onToggle={nightModeToggle} />

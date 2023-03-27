@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   useTheme,
   InputBase,
@@ -23,12 +24,14 @@ export const Hamburger: React.FC<HamburgerProps> = ({ onClick }) => (
 
 export const AppTitle: React.FC<{ text: string }> = ({ text }) => {
   const isNightMode = useTheme().palette.mode === "dark";
+  const navigate = useNavigate();
 
   return (
     <Button
       variant="text"
       startIcon={<VideoLibraryIcon sx={{ color: "red" }} />}
       sx={{ textTransform: "none", mr: 2 }}
+      onClick={() => navigate("/")}
     >
       <Typography
         variant="h6"

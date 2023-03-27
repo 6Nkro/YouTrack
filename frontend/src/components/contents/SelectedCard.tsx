@@ -6,7 +6,7 @@ import {
   DisplayDate,
   DisplayTags,
 } from "./VideoInfoElements";
-import YouTubePlayerContainer from "../../containers/contents/YouTubePlayerContainer";
+import YouTubePlayerContainer from "../../containers/commons/YouTubePlayerContainer";
 import Separator from "../commons/Separator";
 import ExpendableText from "../commons/ExpendableText";
 
@@ -19,7 +19,7 @@ const SelectedCard: React.FC<SelectedCardProps> = ({ snippet, videoId }) => {
   const { title, channelTitle, publishedAt, description, tags } = snippet;
 
   return (
-    <Card sx={{ width: "75%", mb: 1 }}>
+    <Card sx={{ width: "75%", my: 2 }}>
       <CardMedia>
         <YouTubePlayerContainer videoId={videoId} />
       </CardMedia>

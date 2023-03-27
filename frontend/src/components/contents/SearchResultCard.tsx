@@ -25,7 +25,7 @@ const SearchResultCard: React.FC<YouTubeSearchResultCardProps> = ({
   const { thumbnails, title, channelTitle, publishedAt } = snippet;
 
   return (
-    <Card sx={{ width: "75%", mb: 1, boxShadow: "none" }} onClick={onClick}>
+    <Card sx={{ width: "75%", my: 1, boxShadow: "none" }} onClick={onClick}>
       <CardActionArea>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <CardMedia>
