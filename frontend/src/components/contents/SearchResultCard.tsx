@@ -18,10 +18,10 @@ interface YouTubeSearchResultCardProps {
   onClick: MouseEventHandler<HTMLElement>;
 }
 
-const SearchResultCard = ({
+const SearchResultCard: React.FC<YouTubeSearchResultCardProps> = ({
   snippet,
   onClick,
-}: YouTubeSearchResultCardProps) => {
+}) => {
   const { thumbnails, title, channelTitle, publishedAt } = snippet;
 
   return (

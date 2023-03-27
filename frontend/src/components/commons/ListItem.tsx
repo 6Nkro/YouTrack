@@ -9,7 +9,7 @@ interface ListItemProps {
   onClick: MouseEventHandler<HTMLElement>;
 }
 
-const ListItem = ({ icon, text, onClick }: ListItemProps) => (
+const ListItem: React.FC<ListItemProps> = ({ icon, text, onClick }) => (
   <div style={{ overflowX: "hidden" }}>
     <ListItemButton key={text} onClick={onClick}>
       <ListItemIcon>{icon}</ListItemIcon>

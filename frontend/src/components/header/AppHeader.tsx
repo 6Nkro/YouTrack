@@ -8,7 +8,10 @@ interface AppHeaderItemsProps {
   toggleSideBar: MouseEventHandler<HTMLElement>;
 }
 
-const AppHeader = ({ nightMode, toggleSideBar }: AppHeaderItemsProps) => (
+const AppHeader: React.FC<AppHeaderItemsProps> = ({
+  nightMode,
+  toggleSideBar,
+}) => (
   <AppBar
     position="fixed"
     sx={{

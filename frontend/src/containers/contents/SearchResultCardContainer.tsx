@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import YouTubePlayerContainer from "./YouTubePlayerContainer";
 import SelectedCard from "../../components/contents/SelectedCard";
 
-const SearchResultCardContainer = ({ data }: any) => {
+const SearchResultCardContainer: React.FC<{ data: any }> = ({ data }) => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const handleCardClick = (id: string | null) => {

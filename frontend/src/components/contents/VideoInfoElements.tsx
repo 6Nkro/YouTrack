@@ -7,7 +7,7 @@ interface ThumbNailProps {
   title: string;
 }
 
-export const ThumbNail = ({ url, title }: ThumbNailProps) => (
+export const ThumbNail: React.FC<ThumbNailProps> = ({ url, title }) => (
   <img
     src={url}
     alt={title}
@@ -22,7 +22,7 @@ interface TitleProps {
   text: string;
   lineClamp: number;
 }
-export const Title = ({ text, lineClamp }: TitleProps) => (
+export const Title: React.FC<TitleProps> = ({ text, lineClamp }) => (
   <Typography
     component="div"
     variant="h6"
@@ -38,7 +38,7 @@ export const Title = ({ text, lineClamp }: TitleProps) => (
   </Typography>
 );
 
-export const ChannelTitle = ({ text }: { text: string }) => (
+export const ChannelTitle: React.FC<{ text: string }> = ({ text }) => (
   <Typography
     variant="subtitle1"
     color="text.secondary"
@@ -53,7 +53,7 @@ export const ChannelTitle = ({ text }: { text: string }) => (
   </Typography>
 );
 
-export const DisplayDate = ({ text }: { text: string }) => {
+export const DisplayDate: React.FC<{ text: string }> = ({ text }) => {
   const dateFormat = timeAgo(text);
   return (
     <Typography variant="subtitle2" color="text.secondary" component="div">
@@ -62,7 +62,7 @@ export const DisplayDate = ({ text }: { text: string }) => {
   );
 };
 
-export const DisplayTags = ({ tags }: { tags: string[] }) => (
+export const DisplayTags: React.FC<{ tags: string[] }> = ({ tags }) => (
   <Box
     sx={{
       display: "flex",

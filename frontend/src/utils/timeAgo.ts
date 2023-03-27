@@ -1,4 +1,4 @@
-export function timeAgo(date: string): string {
+export const timeAgo = (date: string) => {
   const diffTimeBySecond = Math.floor(
     (new Date().getTime() - new Date(date).getTime()) / 1000
   );
@@ -22,4 +22,4 @@ export function timeAgo(date: string): string {
   } else {
     return `${Math.floor(diffTimeBySecond / year)}년 전`;
   }
-}
+};

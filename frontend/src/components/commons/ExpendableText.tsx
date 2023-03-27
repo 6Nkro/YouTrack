@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Collapse, Typography, Box, Button } from "@mui/material";
 
-const ExpandableText = ({ text }: { text: string }) => {
+const ExpandableText: React.FC<{ text: string }> = ({ text }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleExpandToggle = () => {

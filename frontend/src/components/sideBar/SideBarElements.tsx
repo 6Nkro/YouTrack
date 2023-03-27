@@ -9,7 +9,7 @@ interface HomeButtonProps {
   onClick: MouseEventHandler<HTMLElement>;
 }
 
-export const HomeButton = ({ onClick }: HomeButtonProps) => (
+export const HomeButton: React.FC<HomeButtonProps> = ({ onClick }) => (
   <ListItem icon={<HomeIcon />} text={"Home"} onClick={onClick} />
 );
 
@@ -17,7 +17,7 @@ interface PlayListButtonProps {
   onClick: MouseEventHandler<HTMLElement>;
 }
 
-export const PlayListButton = ({ onClick }: PlayListButtonProps) => (
+export const PlayListButton: React.FC<PlayListButtonProps> = ({ onClick }) => (
   <ListItem icon={<ListIcon />} text={"PlayList"} onClick={onClick} />
 );
 
@@ -26,10 +26,10 @@ interface NightModeButtonProps {
   onToggle: MouseEventHandler<HTMLElement>;
 }
 
-export const NightModeButton = ({
+export const NightModeButton: React.FC<NightModeButtonProps> = ({
   nightMode,
   onToggle,
-}: NightModeButtonProps) => {
+}) => {
   const icon = nightMode ? <LightModeIcon /> : <ModeNightIcon />;
   const text = nightMode ? "LightMode" : "NightMode";
   return <ListItem icon={icon} text={text} onClick={onToggle} />;

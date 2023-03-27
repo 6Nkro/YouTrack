@@ -10,13 +10,13 @@ interface SideBarProps {
   nightModeToggle: MouseEventHandler<HTMLElement>;
 }
 
-const SideBar = ({
+const SideBar: React.FC<SideBarProps> = ({
   isOpen,
   nightMode,
   homeClick,
   playListClick,
   nightModeToggle,
-}: SideBarProps) => {
+}) => {
   const drawerWidth = 240;
 
   return (

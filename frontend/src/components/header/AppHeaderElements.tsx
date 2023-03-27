@@ -14,7 +14,7 @@ interface HamburgerProps {
   onClick: MouseEventHandler<HTMLElement>;
 }
 
-export const Hamburger = ({ onClick }: HamburgerProps) => (
+export const Hamburger: React.FC<HamburgerProps> = ({ onClick }) => (
   <IconButton edge="start" sx={{ mr: 2 }} onClick={onClick}>
     <MenuIcon />
   </IconButton>
@@ -25,7 +25,7 @@ interface AppTitleProps {
   nightMode: boolean;
 }
 
-export const AppTitle = ({ text, nightMode }: AppTitleProps) => (
+export const AppTitle: React.FC<AppTitleProps> = ({ text, nightMode }) => (
   <Button
     variant="text"
     startIcon={<VideoLibraryIcon sx={{ color: "red" }} />}
@@ -49,7 +49,11 @@ interface SearchBarProps {
   onSearch: () => void;
 }
 
-export const SearchBar = ({ onSearch, value, onChange }: SearchBarProps) => {
+export const SearchBar: React.FC<SearchBarProps> = ({
+  onSearch,
+  value,
+  onChange,
+}) => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = event => {
     event.preventDefault();
     onSearch();

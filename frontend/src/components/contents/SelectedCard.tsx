@@ -15,7 +15,7 @@ interface SelectedCardProps {
   videoId: string;
 }
 
-const SelectedCard = ({ snippet, videoId }: SelectedCardProps) => {
+const SelectedCard: React.FC<SelectedCardProps> = ({ snippet, videoId }) => {
   const { title, channelTitle, publishedAt, description } = snippet;
   const tags = snippet.tags ? snippet.tags : [];
 
