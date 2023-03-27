@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import { getSearchResult } from "../../services/YouTubeSearchService";
-import SearchBar from "../../components/header/SearchBar";
+import { SearchBar } from "../../components/header/AppHeaderElements";
 
 const YouTubeSearchBarContainer = () => {
   const [value, setValue] = useState("");

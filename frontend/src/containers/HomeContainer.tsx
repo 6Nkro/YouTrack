@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, CssBaseline } from "@mui/material";
 import AppHeaderContainer from "./header/AppHeaderContainer";
-import SideBarDrawerContainer from "./sideBar/SideBarDrawerContainer";
+import SideBarContainer from "./sideBar/SideBarContainer";
 import MainContentContainer from "./contents/MainContentContainer";
 
 const HomeContainer = () => {
@@ -9,7 +9,7 @@ const HomeContainer = () => {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppHeaderContainer />
-      <SideBarDrawerContainer />
+      <SideBarContainer />
       <MainContentContainer />
     </Box>
   );

@@ -1,11 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import AppHeaderItems from "../../components/header/AppHeaderItems";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import AppHeader from "../../components/header/AppHeader";
+import { toggleSideBar } from "../../redux/slices/commonSlice";
 
-const AppHeaderContainer = () => {
+export const AppHeaderContainer = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleSideBarToggle = () => {
+    dispatch(toggleSideBar());
+  };
+
   const nightMode = useSelector((state: RootState) => state.common.nightMode);
-  return <AppHeaderItems nightMode={nightMode} />;
+
+  return (
+    <AppHeader nightMode={nightMode} toggleSideBar={handleSideBarToggle} />
+  );
 };
 
 export default AppHeaderContainer;

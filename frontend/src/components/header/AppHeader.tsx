@@ -1,14 +1,14 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { Toolbar, Box, AppBar } from "@mui/material";
-import HamburgerContainer from "../../containers/header/HamburgerContainer";
+import { AppTitle, Hamburger } from "./AppHeaderElements";
 import YouTubeSearchBarContainer from "../../containers/header/YouTubeSearchBarContainer";
-import AppTitle from "./AppTitle";
 
 interface AppHeaderItemsProps {
   nightMode: boolean;
+  toggleSideBar: MouseEventHandler<HTMLElement>;
 }
 
-const AppHeaderItems = ({ nightMode }: AppHeaderItemsProps) => (
+const AppHeader = ({ nightMode, toggleSideBar }: AppHeaderItemsProps) => (
   <AppBar
     position="fixed"
     sx={{
@@ -22,18 +22,15 @@ const AppHeaderItems = ({ nightMode }: AppHeaderItemsProps) => (
     }}
   >
     <Toolbar>
-      <Box sx={{ flexGrow: 0 }}>
-        <HamburgerContainer />
-      </Box>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, width: 240, whiteSpace: "nowrap" }}>
+        <Hamburger onClick={toggleSideBar} />
         <AppTitle text="YouTrack" nightMode={nightMode} />
       </Box>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1.2 }}>
         <YouTubeSearchBarContainer />
       </Box>
-      <Box sx={{ flexGrow: 1 }} />
     </Toolbar>
   </AppBar>
 );
 
-export default AppHeaderItems;
+export default AppHeader;

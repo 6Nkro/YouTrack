@@ -7,6 +7,9 @@ const MainContentContainer = () => {
     <Box
       component="main"
       sx={{
+        flexGrow: 1,
+        display: "grid",
+        placeItems: "center",
         p: 3,
       }}
     >
