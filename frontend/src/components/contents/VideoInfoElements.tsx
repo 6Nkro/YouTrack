@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { Typography, Box, Chip } from "@mui/material";
 import { timeAgo } from "../../utils/timeAgo";
 
 interface ThumbNailProps {
@@ -18,13 +18,17 @@ export const ThumbNail = ({ url, title }: ThumbNailProps) => (
   />
 );
 
-export const Title = ({ text }: { text: string }) => (
+interface TitleProps {
+  text: string;
+  lineClamp: number;
+}
+export const Title = ({ text, lineClamp }: TitleProps) => (
   <Typography
     component="div"
     variant="h6"
     sx={{
       display: "-webkit-box",
-      WebkitLineClamp: 2,
+      WebkitLineClamp: lineClamp,
       WebkitBoxOrient: "vertical",
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -57,3 +61,25 @@ export const DisplayDate = ({ text }: { text: string }) => {
     </Typography>
   );
 };
+
+export const DisplayTags = ({ tags }: { tags: string[] }) => (
+  <Box
+    sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      overflow: "hidden",
+      maxHeight: "32px",
+      my: 1,
+    }}
+  >
+    {tags.map(tag => (
+      <Chip
+        key={tag}
+        label={tag}
+        sx={{
+          mr: 1,
+        }}
+      />
+    ))}
+  </Box>
+);

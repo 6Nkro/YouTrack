@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useYouTubeSearch } from "../../hooks/useYouTubeSearch";
-import YouTubeSearchResultCard from "../../components/contents/YouTubeSearchResultCard";
+import SearchResultCard from "../../components/contents/SearchResultCard";
 import { tmpData } from "../../utils/tmpData";
+import SearchResultCardContainer from "./SearchResultCardContainer";
 
 const YouTubeSearchResultContainer = () => {
   // const searchResult = useYouTubeSearch();
@@ -25,13 +26,7 @@ const YouTubeSearchResultContainer = () => {
 
   console.log(data);
 
-  return (
-    <>
-      {data.items.map((item: any) => (
-        <YouTubeSearchResultCard key={item.id.videoId} snippet={item.snippet} />
-      ))}
-    </>
-  );
+  return <SearchResultCardContainer data={data} />;
 };
 
 export default YouTubeSearchResultContainer;
