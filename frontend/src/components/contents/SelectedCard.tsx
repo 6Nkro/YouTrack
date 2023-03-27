@@ -16,8 +16,7 @@ interface SelectedCardProps {
 }
 
 const SelectedCard: React.FC<SelectedCardProps> = ({ snippet, videoId }) => {
-  const { title, channelTitle, publishedAt, description } = snippet;
-  const tags = snippet.tags ? snippet.tags : [];
+  const { title, channelTitle, publishedAt, description, tags } = snippet;
 
   return (
     <Card sx={{ width: "75%", mb: 1 }}>
@@ -31,7 +30,7 @@ const SelectedCard: React.FC<SelectedCardProps> = ({ snippet, videoId }) => {
           <Separator />
           <DisplayDate text={publishedAt} />
         </Box>
-        <DisplayTags tags={tags} />
+        {tags ? <DisplayTags tags={tags} /> : null}
         <Divider sx={{ my: 1.5 }} />
         <ExpendableText text={description} />
       </CardContent>

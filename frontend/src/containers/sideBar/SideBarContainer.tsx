@@ -6,7 +6,6 @@ import { toggleNightMode } from "../../redux/slices/commonSlice";
 
 const SideBarContainer = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const nightMode = useSelector((state: RootState) => state.common.nightMode);
   const isOpen = useSelector((state: RootState) => state.common.sideBar);
 
   const handleHomeClick = () => {
@@ -24,7 +23,6 @@ const SideBarContainer = () => {
   return (
     <SideBar
       isOpen={isOpen}
-      nightMode={nightMode}
       homeClick={handleHomeClick}
       playListClick={handlePlaylistClick}
       nightModeToggle={handleNightModeToggle}

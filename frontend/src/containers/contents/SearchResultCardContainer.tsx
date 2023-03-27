@@ -1,6 +1,5 @@
 import SearchResultCard from "../../components/contents/SearchResultCard";
 import React, { useEffect, useState } from "react";
-import YouTubePlayerContainer from "./YouTubePlayerContainer";
 import SelectedCard from "../../components/contents/SelectedCard";
 
 const SearchResultCardContainer: React.FC<{ data: any }> = ({ data }) => {

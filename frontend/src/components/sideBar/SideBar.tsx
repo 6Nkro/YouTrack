@@ -4,7 +4,6 @@ import { HomeButton, PlayListButton, NightModeButton } from "./SideBarElements";
 
 interface SideBarProps {
   isOpen: boolean;
-  nightMode: boolean;
   homeClick: MouseEventHandler<HTMLElement>;
   playListClick: MouseEventHandler<HTMLElement>;
   nightModeToggle: MouseEventHandler<HTMLElement>;
@@ -12,7 +11,6 @@ interface SideBarProps {
 
 const SideBar: React.FC<SideBarProps> = ({
   isOpen,
-  nightMode,
   homeClick,
   playListClick,
   nightModeToggle,
@@ -34,7 +32,7 @@ const SideBar: React.FC<SideBarProps> = ({
       <Toolbar sx={{ mb: 2 }} />
       <HomeButton onClick={homeClick} />
       <PlayListButton onClick={playListClick} />
-      <NightModeButton nightMode={nightMode} onToggle={nightModeToggle} />
+      <NightModeButton onToggle={nightModeToggle} />
     </Drawer>
   );
 };
