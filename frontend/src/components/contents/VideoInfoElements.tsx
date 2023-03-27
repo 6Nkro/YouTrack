@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, Box, Chip } from "@mui/material";
 import { timeAgo } from "../../utils/timeAgo";
+import CustomScrollbar from "../commons/CustomScrollBar";
 
 interface ThumbNailProps {
   url: string;
@@ -63,13 +64,13 @@ export const DisplayDate: React.FC<{ text: string }> = ({ text }) => {
 };
 
 export const DisplayTags: React.FC<{ tags: string[] }> = ({ tags }) => (
-  <Box
+  <CustomScrollbar
     sx={{
       display: "flex",
-      flexWrap: "wrap",
-      overflow: "hidden",
-      maxHeight: "32px",
+      overflowX: "auto",
+      whiteSpace: "nowrap",
       my: 1,
+      pb: 1,
     }}
   >
     {tags.map(tag => (
@@ -81,5 +82,5 @@ export const DisplayTags: React.FC<{ tags: string[] }> = ({ tags }) => (
         }}
       />
     ))}
-  </Box>
+  </CustomScrollbar>
 );

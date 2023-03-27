@@ -1,8 +1,9 @@
 import React, { MouseEventHandler } from "react";
 import {
+  useTheme,
+  InputBase,
   Button,
   IconButton,
-  InputBase,
   Paper,
   Typography,
 } from "@mui/material";
@@ -20,28 +21,27 @@ export const Hamburger: React.FC<HamburgerProps> = ({ onClick }) => (
   </IconButton>
 );
 
-interface AppTitleProps {
-  text: string;
-  nightMode: boolean;
-}
+export const AppTitle: React.FC<{ text: string }> = ({ text }) => {
+  const isNightMode = useTheme().palette.mode === "dark";
 
-export const AppTitle: React.FC<AppTitleProps> = ({ text, nightMode }) => (
-  <Button
-    variant="text"
-    startIcon={<VideoLibraryIcon sx={{ color: "red" }} />}
-    sx={{ textTransform: "none", mr: 2 }}
-  >
-    <Typography
-      variant="h6"
-      sx={{
-        color: nightMode ? "white" : "black",
-        fontWeight: "600",
-      }}
+  return (
+    <Button
+      variant="text"
+      startIcon={<VideoLibraryIcon sx={{ color: "red" }} />}
+      sx={{ textTransform: "none", mr: 2 }}
     >
-      {text}
-    </Typography>
-  </Button>
-);
+      <Typography
+        variant="h6"
+        sx={{
+          color: isNightMode ? "white" : "black",
+          fontWeight: "600",
+        }}
+      >
+        {text}
+      </Typography>
+    </Button>
+  );
+};
 
 interface SearchBarProps {
   value: string;

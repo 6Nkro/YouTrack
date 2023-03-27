@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
 import AppHeader from "../../components/header/AppHeader";
 import { toggleSideBar } from "../../redux/slices/commonSlice";
 
@@ -11,11 +11,7 @@ export const AppHeaderContainer = () => {
     dispatch(toggleSideBar());
   };
 
-  const nightMode = useSelector((state: RootState) => state.common.nightMode);
-
-  return (
-    <AppHeader nightMode={nightMode} toggleSideBar={handleSideBarToggle} />
-  );
+  return <AppHeader toggleSideBar={handleSideBarToggle} />;
 };
 
 export default AppHeaderContainer;
