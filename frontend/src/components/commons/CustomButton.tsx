@@ -2,7 +2,7 @@ import React, { MouseEventHandler } from "react";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { OverridableStringUnion } from "@mui/types";
 import { ButtonPropsSizeOverrides } from "@mui/material/Button/Button";
 

@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import path from "path";
 import mongoose from "mongoose";
+import accountRoute from "./routes/accountRoute";
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,8 @@ mongoose
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/account", accountRoute);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
