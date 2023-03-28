@@ -5,7 +5,6 @@ import {
   CardMedia,
   Box,
   Divider,
-  IconButton,
   Typography,
 } from "@mui/material";
 import { YouTubePlayer } from "../commons/VideoPlayer";
@@ -15,12 +14,12 @@ import {
   EllipsisText,
   Separator,
   ExpendableText,
-} from "../commons/CustomTypography";
+} from "../commons/CustomTypographys";
 import { timeAgo } from "../../utils/timeAgo";
 import { DisplayTags } from "../commons/VideoInfoElements";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import ReplyIcon from "@mui/icons-material/Reply";
-import { IconTextButton } from "../commons/CustomButton";
+import { IconTextButton } from "../commons/CustomButtons";
 
 interface SelectedCardProps {
   snippet: any;

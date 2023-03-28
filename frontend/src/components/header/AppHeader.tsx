@@ -18,12 +18,12 @@ const AppHeader: React.FC<AppHeaderItemsProps> = ({ toggleSideBar }) => {
         backgroundColor: theme.palette.mode === "dark" ? undefined : "white",
       }}
     >
-      <Box sx={{ display: "flex", height: 64, alignItems: "center", pl: 3 }}>
-        <Box sx={{ flexGrow: 1, width: 240, whiteSpace: "nowrap" }}>
+      <Box sx={{ display: "flex", height: 64, alignItems: "center" }}>
+        <Box sx={{ flexGrow: 1, width: 240, whiteSpace: "nowrap", pl: 3 }}>
           <Hamburger onClick={toggleSideBar} />
           <AppTitle text="YouTrack" />
         </Box>
-        <Box sx={{ flexGrow: 1.2 }}>
+        <Box sx={{ flexGrow: 1 }}>
           <SearchBarContainer />
         </Box>
       </Box>

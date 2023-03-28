@@ -7,7 +7,7 @@ import {
   Box,
 } from "@mui/material";
 import { ThumbNail } from "../commons/VideoInfoElements";
-import { LineClampText, EllipsisText } from "../commons/CustomTypography";
+import { LineClampText, EllipsisText } from "../commons/CustomTypographys";
 import { timeAgo } from "../../utils/timeAgo";
 
 interface YouTubeSearchResultCardProps {
