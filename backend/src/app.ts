@@ -19,9 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/account", accountRoute);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend")));
+  app.use(express.static(path.join(__dirname, "../frontend/")));
   app.get("/*", (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, "../frontend", "index.html"));
+    res.sendFile(path.join(__dirname, "../frontend/", "index.html"));
   });
 }
 
