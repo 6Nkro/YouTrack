@@ -1,45 +1,41 @@
 import axios from "axios";
+import {
+  YouTubeApiParams,
+  YouTubeSnippetProps,
+  YouTubeStatisticsProps,
+  YouTubeVideoProps,
+} from "../types/youtube";
 
 const key = process.env.REACT_APP_YOUTUBE_API_KEY;
+const baseUrl = "https://www.googleapis.com/youtube/v3/";
 const maxResults = 20;
 const chart = "mostPopular";
 const regionCode = "KR";
 
-const getPopularVideos = async (q: string) => {
-  const url = "https://www.googleapis.com/youtube/v3/videos";
-  const params = { part: "snippet", maxResults, chart, regionCode, key };
-  const response = await axios.get(url, { params });
-  return response.data.items;
-};
+async function fetchVideosData<T>(type: string, params: any): Promise<T[]> {
+  const url = `${baseUrl}${type}`;
+  try {
+    const response = await axios.get(url, { params });
+    return response.data.items;
+  } catch (error) {
+    console.error("Error:", error);
+    return [];
+  }
+}
 
-const getSearchVideos = async (q: string) => {
-  const url = "https://www.googleapis.com/youtube/v3/search";
-  const params = { part: "snippet", maxResults, q, key };
-  const response = await axios.get(url, { params });
-  return response.data.items;
-};
-
-export async function getYouTubeSearchResult(q: string) {
-  const isEmptyQuery = q === "";
-  const items = isEmptyQuery
-    ? await getPopularVideos(q)
-    : await getSearchVideos(q);
-  const id = isEmptyQuery
-    ? items.map((item: { id: string }) => item.id)
-    : items.map((item: { id: { videoId: string } }) => item.id.videoId);
-
-  const url = "https://www.googleapis.com/youtube/v3/videos";
-  const params = { part: "statistics", id: id.join(","), key };
-  const response = await axios.get(url, { params });
-
-  return items.map((item: any, index: number) => {
+function processVideosData(
+  snippetParts: YouTubeSnippetProps[],
+  statisticsParts: YouTubeStatisticsProps[],
+  ids: string[]
+): YouTubeVideoProps[] {
+  return snippetParts.map((snippetPart: any, index: number) => {
     const { title, channelTitle, publishedAt, description, tags } =
-      item.snippet;
-    const { viewCount } = response.data.items[index].statistics;
+      snippetPart.snippet;
+    const { viewCount } = statisticsParts[index].statistics;
 
     return {
-      id: id[index],
-      thumbnail: item.snippet.thumbnails.medium.url,
+      id: ids[index],
+      thumbnail: snippetPart.snippet.thumbnails.medium.url,
       author: channelTitle,
       title,
       publishedAt,
@@ -48,4 +44,28 @@ export async function getYouTubeSearchResult(q: string) {
       tags,
     };
   });
+}
+
+export async function getYouTubeSearchResult(
+  q: string
+): Promise<YouTubeVideoProps[]> {
+  const isEmptyQuery = q === "";
+  let type = isEmptyQuery ? "videos" : "search";
+  let params: YouTubeApiParams = isEmptyQuery
+    ? { part: "snippet", maxResults, chart, regionCode, key }
+    : { part: "snippet", maxResults, q, key };
+
+  const snippetParts = await fetchVideosData<YouTubeSnippetProps>(type, params);
+  const ids = snippetParts.map((snippetPart: YouTubeSnippetProps) =>
+    typeof snippetPart.id === "string" ? snippetPart.id : snippetPart.id.videoId
+  );
+
+  type = "videos";
+  params = { part: "statistics", id: ids.join(","), key };
+  const statisticsParts = await fetchVideosData<YouTubeStatisticsProps>(
+    type,
+    params
+  );
+
+  return processVideosData(snippetParts, statisticsParts, ids);
 }

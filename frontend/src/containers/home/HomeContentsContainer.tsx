@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SearchResultCard from "../../components/home/SearchResultCard";
 import SelectedCard from "../../components/home/SelectedCard";
-import { YouTubeVideoProps } from "../../types/videoProps";
+import { YouTubeVideoProps } from "../../types/youtube";
 
 const HomeContentsContainer: React.FC<{
   videos: YouTubeVideoProps[];

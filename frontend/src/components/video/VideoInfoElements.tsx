@@ -1,6 +1,6 @@
 import React from "react";
 import { Chip } from "@mui/material";
-import CustomScrollbar from "./CustomScrollBar";
+import CustomScrollbar from "../commons/CustomScrollBar";
 
 interface ThumbNailProps {
   url: string;

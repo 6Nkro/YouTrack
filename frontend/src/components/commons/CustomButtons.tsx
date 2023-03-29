@@ -3,8 +3,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Button } from "@mui/material";
-import { OverridableStringUnion } from "@mui/types";
-import { ButtonPropsSizeOverrides } from "@mui/material/Button/Button";
 
 interface ListIconTextButtonProps {
   icon: React.ReactElement;
@@ -29,10 +27,7 @@ interface IconTextButtonProps {
   icon: React.ReactElement;
   text: React.ReactElement | string;
   onClick?: MouseEventHandler<HTMLElement>;
-  size?: OverridableStringUnion<
-    "small" | "medium" | "large",
-    ButtonPropsSizeOverrides
-  >;
+  size?: "small" | "medium" | "large";
 }
 
 export const IconTextButton: React.FC<IconTextButtonProps> = ({

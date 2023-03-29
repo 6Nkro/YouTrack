@@ -6,14 +6,14 @@ import {
   CardMedia,
   Box,
 } from "@mui/material";
-import { ThumbNail } from "../commons/VideoInfoElements";
+import { ThumbNail } from "../video/VideoInfoElements";
 import {
   LineClampText,
   EllipsisText,
   Separator,
 } from "../commons/CustomTypographys";
 import { timeAgo, formatViewCount } from "../../utils/formatData";
-import { YouTubeVideoProps } from "../../types/videoProps";
+import { YouTubeVideoProps } from "../../types/youtube";
 
 interface YouTubeSearchResultCardProps {
   video: YouTubeVideoProps;

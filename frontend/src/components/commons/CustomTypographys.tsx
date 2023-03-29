@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { Box, Button, Collapse, Typography } from "@mui/material";
-import { OverridableStringUnion } from "@mui/types";
 import { Variant } from "@mui/material/styles/createTypography";
-import { TypographyPropsVariantOverrides } from "@mui/material/Typography/Typography";
 
 interface SeparatorProps {
   mx?: number;
   color?: string;
-  variant?: OverridableStringUnion<
-    Variant | "inherit",
-    TypographyPropsVariantOverrides
-  >;
+  variant?: Variant | "inherit";
 }
 
 export const Separator: React.FC<SeparatorProps> = ({ mx, color, variant }) => (
@@ -27,10 +22,7 @@ interface LineClampTextProps {
   text: string;
   lineClamp: number;
   color?: string;
-  variant?: OverridableStringUnion<
-    Variant | "inherit",
-    TypographyPropsVariantOverrides
-  >;
+  variant?: Variant | "inherit";
 }
 
 export const LineClampText: React.FC<LineClampTextProps> = ({
@@ -57,10 +49,7 @@ export const LineClampText: React.FC<LineClampTextProps> = ({
 interface EllipsisTextProps {
   text: string;
   color?: string;
-  variant?: OverridableStringUnion<
-    Variant | "inherit",
-    TypographyPropsVariantOverrides
-  >;
+  variant?: Variant | "inherit";
 }
 
 export const EllipsisText: React.FC<EllipsisTextProps> = ({

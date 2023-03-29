@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import {
   useTheme,
   InputBase,
-  Button,
   IconButton,
   Paper,
   Typography,

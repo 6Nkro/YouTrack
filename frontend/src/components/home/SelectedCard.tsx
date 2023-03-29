@@ -7,7 +7,7 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-import { YouTubePlayer } from "../commons/VideoPlayer";
+import YouTubePlayer from "../video/YouTubePlayer";
 import ResponsiveHeightContainer from "../../containers/commons/ResponsiveHeightContainer";
 import {
   EllipsisText,
@@ -15,12 +15,11 @@ import {
   ExpendableText,
 } from "../commons/CustomTypographys";
 import { timeAgo, formatViewCount } from "../../utils/formatData";
-import { DisplayTags } from "../commons/VideoInfoElements";
+import { DisplayTags } from "../video/VideoInfoElements";
 import { IconTextButton } from "../commons/CustomButtons";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import ReplyIcon from "@mui/icons-material/Reply";
-
-import { YouTubeVideoProps } from "../../types/videoProps";
+import { YouTubeVideoProps } from "../../types/youtube";
 
 const SelectedCard: React.FC<{ video: YouTubeVideoProps }> = ({ video }) => {
   const { id, title, author, viewCount, publishedAt, description, tags } =
