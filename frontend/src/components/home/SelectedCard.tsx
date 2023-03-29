@@ -10,38 +10,41 @@ import {
 import { YouTubePlayer } from "../commons/VideoPlayer";
 import ResponsiveHeightContainer from "../../containers/commons/ResponsiveHeightContainer";
 import {
-  LineClampText,
   EllipsisText,
   Separator,
   ExpendableText,
 } from "../commons/CustomTypographys";
-import { timeAgo } from "../../utils/timeAgo";
+import { timeAgo, formatViewCount } from "../../utils/formatData";
 import { DisplayTags } from "../commons/VideoInfoElements";
+import { IconTextButton } from "../commons/CustomButtons";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import ReplyIcon from "@mui/icons-material/Reply";
-import { IconTextButton } from "../commons/CustomButtons";
 
-interface SelectedCardProps {
-  snippet: any;
-  videoId: string;
-}
+import { YouTubeVideoProps } from "../../types/videoProps";
 
-const SelectedCard: React.FC<SelectedCardProps> = ({ snippet, videoId }) => {
-  const { title, channelTitle, publishedAt, description, tags } = snippet;
+const SelectedCard: React.FC<{ video: YouTubeVideoProps }> = ({ video }) => {
+  const { id, title, author, viewCount, publishedAt, description, tags } =
+    video;
 
   return (
     <Card sx={{ width: "75%", my: 2 }}>
       <CardMedia>
         <ResponsiveHeightContainer
-          element={<YouTubePlayer videoId={videoId} />}
+          element={<YouTubePlayer videoId={id} />}
           ratio={9 / 16}
         />
       </CardMedia>
       <CardContent>
-        <LineClampText variant="h6" text={title} lineClamp={1} />
+        <EllipsisText text={title} variant="h6" />
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <EllipsisText
-            text={channelTitle}
+            text={author}
+            variant="subtitle1"
+            color="text.secondary"
+          />
+          <Separator variant="subtitle1" color="text.secondary" />
+          <EllipsisText
+            text={`조회수 ${formatViewCount(viewCount)}회`}
             variant="subtitle1"
             color="text.secondary"
           />

@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
-import { getSearchResult } from "../services/YouTubeSearchService";
+import { getYouTubeSearchResult } from "../services/YouTubeSearchService";
 
 export function useYouTubeSearch() {
-  return useQuery("searchResult", () => getSearchResult(""), {
+  return useQuery("searchResult", () => getYouTubeSearchResult(""), {
     enabled: false,
     retry: false,
   });
