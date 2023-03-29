@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { useYouTubeSearch } from "../../hooks/useYouTubeSearch";
-import SearchResultCard from "../../components/home/SearchResultCard";
-import { tmpData } from "../../utils/tmpData";
+import { tmpYouTubeData } from "../../utils/tmpData";
 import HomeContentsContainer from "./HomeContentsContainer";
+import { useLocation } from "react-router-dom";
 
 const SearchResultContainer = () => {
   // const searchResult = useYouTubeSearch();
   // const { data, isLoading, isError, refetch } = searchResult;
+  //
+  // const path = useLocation().pathname;
   //
   // useEffect(() => {
   //   if (!data) {
@@ -22,11 +24,13 @@ const SearchResultContainer = () => {
   //   return <div>Error</div>;
   // }
 
-  const data = tmpData();
+  const data = tmpYouTubeData();
+
+  // console.log(path);
 
   console.log(data);
 
-  return <HomeContentsContainer data={data} />;
+  return <HomeContentsContainer videos={data} />;
 };
 
 export default SearchResultContainer;

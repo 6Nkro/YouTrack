@@ -2,7 +2,7 @@ import React from "react";
 import { Button, ButtonGroup } from "@mui/material";
 
 const PlatformButtons = () => {
-  const platforms = ["YouTube", "Twitch", "Facebook", "Vimeo", "DailyMotion"];
+  const platforms = ["YouTube"];
 
   return (
     <ButtonGroup color="info" size="large">
