@@ -11,7 +11,7 @@ import {
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { IconTextButton } from "../commons/CustomButton";
+import { IconTextButton } from "../commons/CustomButtons";
 
 interface HamburgerProps {
   onClick: MouseEventHandler<HTMLElement>;

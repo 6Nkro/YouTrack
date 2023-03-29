@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import SearchResultCard from "../../components/home/SearchResultCard";
 import SelectedCard from "../../components/home/SelectedCard";
+import { YouTubeVideoProps } from "../../types/videoProps";
 
-const HomeContentsContainer: React.FC<{ data: any }> = ({ data }) => {
+const HomeContentsContainer: React.FC<{
+  videos: YouTubeVideoProps[];
+}> = ({ videos }) => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const handleCardClick = (id: string | null) => {
@@ -11,14 +14,14 @@ const HomeContentsContainer: React.FC<{ data: any }> = ({ data }) => {
 
   return (
     <>
-      {data.items.map((item: any) => (
-        <React.Fragment key={item.id}>
-          {item.id === selectedId ? (
-            <SelectedCard snippet={item.snippet} videoId={item.id} />
+      {videos.map(video => (
+        <React.Fragment key={video.id}>
+          {video.id === selectedId ? (
+            <SelectedCard video={video} />
           ) : (
             <SearchResultCard
-              snippet={item.snippet}
-              onClick={() => handleCardClick(item.id)}
+              video={video}
+              onClick={() => handleCardClick(video.id)}
             />
           )}
         </React.Fragment>

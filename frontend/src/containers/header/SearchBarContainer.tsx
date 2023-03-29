@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
-import { getSearchResult } from "../../services/YouTubeSearchService";
+import { getYouTubeSearchResult } from "../../services/YouTubeSearchService";
 import { SearchBar } from "../../components/header/AppHeaderElements";
 
 const SearchBarContainer = () => {
@@ -8,7 +8,7 @@ const SearchBarContainer = () => {
   const queryClient = useQueryClient();
 
   const handleSearch = async () => {
-    const data = await getSearchResult(value);
+    const data = await getYouTubeSearchResult(value);
     queryClient.setQueryData("searchResult", data);
   };
 

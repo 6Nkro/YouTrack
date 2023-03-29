@@ -14,7 +14,7 @@ const SideBarContainer = () => {
     <SideBar
       isOpen={isOpen}
       homeClick={() => navigate("/")}
-      playListClick={() => navigate("/playList")}
+      playListClick={() => navigate("/playlist")}
       nightModeToggle={() => dispatch(toggleNightMode())}
     />
   );

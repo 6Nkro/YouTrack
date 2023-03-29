@@ -1,6 +1,6 @@
 import React, { MouseEventHandler } from "react";
 import { useTheme } from "@mui/material";
-import { ListIconTextButton } from "../commons/CustomButton";
+import { ListIconTextButton } from "../commons/CustomButtons";
 import HomeIcon from "@mui/icons-material/Home";
 import ListIcon from "@mui/icons-material/List";
 import ModeNightIcon from "@mui/icons-material/ModeNight";

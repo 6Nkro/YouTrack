@@ -29,9 +29,10 @@ const App = () => {
           <Router>
             <AppHeaderContainer />
             <SideBarContainer />
-            <Box sx={{ pt: 8 }}>
+            <Box sx={{ pt: 8, flexGrow: 1 }}>
               <Routes>
                 <Route path="/" element={<HomeContainer />} />
+                <Route path="/search" element={<HomeContainer />} />
                 <Route path="/playlist" element={<PlayListContainer />} />
               </Routes>
             </Box>

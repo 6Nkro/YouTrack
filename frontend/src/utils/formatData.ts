@@ -23,3 +23,17 @@ export const timeAgo = (date: string) => {
     return `${Math.floor(diffTimeBySecond / year)}년 전`;
   }
 };
+
+export const formatViewCount = (viewCount: number | string) => {
+  viewCount = +viewCount;
+  const units = ["", "만", "억"];
+  const filterToFixed = (n: number) => (n < 100 ? n.toFixed(1) : n.toFixed(0));
+
+  let unitIndex = 0;
+  while (viewCount >= 10000 && unitIndex < units.length - 1) {
+    viewCount /= 10000;
+    unitIndex++;
+  }
+
+  return `${filterToFixed(viewCount).replace(/\.0$/, "")}${units[unitIndex]}`;
+};
