@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 import mongoose from "mongoose";
 import accountRoute from "./routes/accountRoute";
+import searchRoute from "./routes/searchRoute";
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/account", accountRoute);
+app.use("/api/search", searchRoute);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/")));

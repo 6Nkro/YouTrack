@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import SearchResultCard from "../../components/home/SearchResultCard";
 import SelectedCard from "../../components/home/SelectedCard";
-import { YouTubeVideoProps } from "../../types/youtube";
+import { CommonVideoData } from "../../../../types/video";
 
 const HomeContentsContainer: React.FC<{
-  videos: YouTubeVideoProps[];
+  videos: CommonVideoData[];
 }> = ({ videos }) => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 

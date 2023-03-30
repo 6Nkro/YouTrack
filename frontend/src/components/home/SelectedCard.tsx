@@ -19,9 +19,13 @@ import { DisplayTags } from "../video/VideoInfoElements";
 import { IconTextButton } from "../commons/CustomButtons";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import ReplyIcon from "@mui/icons-material/Reply";
-import { YouTubeVideoProps } from "../../types/youtube";
+import { CommonVideoData } from "../../../../types/video";
 
-const SelectedCard: React.FC<{ video: YouTubeVideoProps }> = ({ video }) => {
+interface SelectedCardProps {
+  video: CommonVideoData;
+}
+
+const SelectedCard: React.FC<SelectedCardProps> = ({ video }) => {
   const { id, title, author, viewCount, publishedAt, description, tags } =
     video;
 

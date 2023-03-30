@@ -37,3 +37,17 @@ export const formatViewCount = (viewCount: number | string) => {
 
   return `${filterToFixed(viewCount).replace(/\.0$/, "")}${units[unitIndex]}`;
 };
+
+export const formatKakaoVideoUrl = (url: string) => {
+  const baseUrl = "https://tv.kakao.com/embed/player/cliplink/";
+  const videoId = url.split("/v/")[1];
+  const params = [
+    "service=kakao_tv",
+    "section=channel",
+    "autoplay=1",
+    "profile=HIGH",
+    "wmode=transparent",
+  ];
+
+  return `${baseUrl}${videoId}?${params.join("&")}`;
+};

@@ -13,10 +13,10 @@ import {
   Separator,
 } from "../commons/CustomTypographys";
 import { timeAgo, formatViewCount } from "../../utils/formatData";
-import { YouTubeVideoProps } from "../../types/youtube";
+import { CommonVideoData } from "../../../../types/video";
 
 interface YouTubeSearchResultCardProps {
-  video: YouTubeVideoProps;
+  video: CommonVideoData;
   onClick: MouseEventHandler<HTMLElement>;
 }
 

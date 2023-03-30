@@ -8,26 +8,24 @@ const SearchResultContainer = () => {
   const path = useLocation().pathname;
   console.log(path);
 
-  // const searchResult = useYouTubeSearch();
-  // const { data, isLoading, isError, refetch } = searchResult;
-  //
-  // useEffect(() => {
-  //   if (!data) {
-  //     refetch();
-  //   }
-  // }, [data, refetch]);
-  //
-  // if (isLoading || !data) {
-  //   return <div>Loading...</div>;
-  // }
-  //
-  // if (isError) {
-  //   return <div>Error</div>;
-  // }
+  const searchResult = useYouTubeSearch();
+  const { data, isLoading, isError, refetch } = searchResult;
 
-  const data = tmpYouTubeData();
+  useEffect(() => {
+    if (!data) {
+      refetch();
+    }
+  }, [data, refetch]);
 
-  console.log(data);
+  if (isLoading || !data) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
+  }
+
+  // const data = tmpYouTubeData();
 
   return <HomeContentsContainer videos={data} />;
 };
