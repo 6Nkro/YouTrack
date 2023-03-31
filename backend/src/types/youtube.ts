@@ -9,32 +9,19 @@ export interface YouTubeApiParams {
   id?: string;
 }
 
-export interface YouTubeSearchParts {
-  items: YouTubeSearchPart[] | [];
-  nextPageToken?: string;
-}
-
-export interface YouTubeDetailParts {
-  items: YouTubeDetailPart[] | [];
-}
-
 export interface ErrorFetchYouTube {
   items: [];
   nextPageToken: undefined;
 }
 
+export interface YouTubeSearchParts {
+  items: YouTubeSearchPart[] | [];
+  nextPageToken?: string;
+}
+
 interface YouTubeSearchPart {
   id: Id;
   snippet: YouTubeSnippet;
-}
-
-interface YouTubeDetailPart {
-  contentDetails: {
-    duration: string;
-  };
-  statistics: {
-    viewCount: string;
-  };
 }
 
 type Id = string | { videoId: string };
@@ -50,4 +37,17 @@ interface YouTubeSnippet {
   publishedAt: string;
   description: string;
   tags?: string[];
+}
+
+export interface YouTubeDetailParts {
+  items: YouTubeDetailPart[] | [];
+}
+
+interface YouTubeDetailPart {
+  contentDetails: {
+    duration: string;
+  };
+  statistics: {
+    viewCount: string;
+  };
 }

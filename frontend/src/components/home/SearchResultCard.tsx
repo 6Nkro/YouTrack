@@ -13,7 +13,7 @@ import {
   Separator,
 } from "../commons/CustomTypographys";
 import { timeAgo, formatViewCount } from "../../utils/formatData";
-import { CommonVideoData } from "../../../../types/video";
+import { CommonVideoData } from "../../../../types/common";
 
 interface YouTubeSearchResultCardProps {
   video: CommonVideoData;

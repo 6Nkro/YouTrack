@@ -1,22 +1,16 @@
-import React, { useEffect } from "react";
-import { useYouTubeSearch } from "../../hooks/useYouTubeSearch";
-import { tmpYouTubeData } from "../../utils/tmpData";
-import HomeContentsContainer from "./HomeContentsContainer";
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import SearchResultCard from "../../components/home/SearchResultCard";
+import SelectedCard from "../../components/home/SelectedCard";
+import { useSearch } from "../../hooks/useSearch";
+import { RootState } from "../../store/store";
 
 const SearchResultContainer = () => {
-  const path = useLocation().pathname;
-  console.log(path);
+  const params = useSelector((state: RootState) => state.search);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const { data, isLoading, isError } = useSearch(params);
 
-  const searchResult = useYouTubeSearch();
-  const { data, isLoading, isError, refetch } = searchResult;
-
-  useEffect(() => {
-    if (!data) {
-      refetch();
-    }
-  }, [data, refetch]);
-
+  console.log({ params, data, isLoading });
   if (isLoading || !data) {
     return <div>Loading...</div>;
   }
@@ -25,9 +19,26 @@ const SearchResultContainer = () => {
     return <div>Error</div>;
   }
 
-  // const data = tmpYouTubeData();
+  const handleCardClick = (id: string | null) => {
+    setSelectedId(selectedId !== id ? id : null);
+  };
 
-  return <HomeContentsContainer videos={data} />;
+  return (
+    <>
+      {data.map(video => (
+        <React.Fragment key={video.id}>
+          {video.id === selectedId ? (
+            <SelectedCard video={video} platform={video.platform} />
+          ) : (
+            <SearchResultCard
+              video={video}
+              onClick={() => handleCardClick(video.id)}
+            />
+          )}
+        </React.Fragment>
+      ))}
+    </>
+  );
 };
 
 export default SearchResultContainer;

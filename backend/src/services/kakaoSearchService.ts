@@ -1,6 +1,10 @@
 import axios from "axios";
-import { KakaoItem } from "../../../types/kakao";
-import { CommonVideoData, CommonVideoDataList } from "../../../types/video";
+import { KakaoItem } from "../types/kakao";
+import {
+  CommonVideoData,
+  CommonVideoDataList,
+  Platform,
+} from "../../../types/common";
 
 const sort = "Score";
 const fulllevels = "list";
@@ -21,7 +25,8 @@ async function fetchKakaoData(q: string, page: string): Promise<KakaoItem[]> {
 
 export async function processKakaoData(
   q: string,
-  page: string
+  page: string,
+  platform: Platform
 ): Promise<CommonVideoDataList> {
   page = page === "" ? "1" : page;
   const searchData = await fetchKakaoData(q, page);
@@ -29,7 +34,6 @@ export async function processKakaoData(
   const nextPageToken = +page + 1;
   const items = searchData.map((item): CommonVideoData => {
     const {
-      id,
       title,
       description,
       duration,
@@ -40,7 +44,7 @@ export async function processKakaoData(
     } = item.clip;
 
     return {
-      id,
+      id: item.id.toString(),
       thumbnail: thumbnailUrl,
       duration: duration.toString(),
       author: item.channel.name,
@@ -48,6 +52,7 @@ export async function processKakaoData(
       publishedAt: createTime,
       viewCount: playCount,
       description,
+      platform,
       tags: tagList,
     };
   });

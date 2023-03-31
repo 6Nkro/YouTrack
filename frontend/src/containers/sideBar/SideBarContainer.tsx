@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { toggleNightMode } from "../../redux/slices/commonSlice";
+import { AppDispatch, RootState } from "../../store/store";
+import { toggleNightMode } from "../../store/slices/commonSlice";
 import SideBar from "../../components/sideBar/SideBar";
 
 const SideBarContainer = () => {

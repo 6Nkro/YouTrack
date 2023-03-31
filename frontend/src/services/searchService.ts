@@ -1,10 +1,10 @@
 import axios from "axios";
-import { CommonVideoData } from "../../../types/video";
+import { CommonVideoData } from "../../../types/common";
+import { SearchState } from "../types/state";
 
 export async function fetchVideoData(
-  query: string
+  params: SearchState
 ): Promise<CommonVideoData[]> {
-  const params = { query, platform: "YouTube" };
   const res = await axios.get("/api/search", { params });
   console.log(res.data);
   return res.data.items;

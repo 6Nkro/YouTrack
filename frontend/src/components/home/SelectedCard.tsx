@@ -7,75 +7,85 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-import YouTubePlayer from "../video/YouTubePlayer";
-import ResponsiveHeightContainer from "../../containers/commons/ResponsiveHeightContainer";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import ReplyIcon from "@mui/icons-material/Reply";
 import {
   EllipsisText,
   Separator,
   ExpendableText,
 } from "../commons/CustomTypographys";
-import { timeAgo, formatViewCount } from "../../utils/formatData";
+import {
+  timeAgo,
+  formatViewCount,
+  formatKakaoVideoUrl,
+} from "../../utils/formatData";
 import { DisplayTags } from "../video/VideoInfoElements";
 import { IconTextButton } from "../commons/CustomButtons";
-import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
-import ReplyIcon from "@mui/icons-material/Reply";
-import { CommonVideoData } from "../../../../types/video";
+import ResponsiveHeightContainer from "../../containers/commons/ResponsiveHeightContainer";
+import { YouTubePlayer, CommonVideoPlayer } from "../video/VideoPlayers";
+import { CommonVideoData, Platform } from "../../../../types/common";
 
 interface SelectedCardProps {
   video: CommonVideoData;
+  platform: Platform;
 }
 
-const SelectedCard: React.FC<SelectedCardProps> = ({ video }) => {
+const SelectedCard: React.FC<SelectedCardProps> = ({ video, platform }) => {
   const { id, title, author, viewCount, publishedAt, description, tags } =
     video;
+
+  const videoMap = {
+    YouTube: <YouTubePlayer videoId={id} />,
+    kakao: <CommonVideoPlayer url={formatKakaoVideoUrl(id)} />,
+  };
+
+  const textElementProps = [
+    author,
+    `조회수 ${formatViewCount(viewCount)}회`,
+    timeAgo(publishedAt),
+  ];
+
+  const iconTextButtonProps = [
+    { text: "저장", icon: <PlaylistAddIcon color="action" /> },
+    { text: "공유", icon: <ReplyIcon color="action" /> },
+  ];
 
   return (
     <Card sx={{ width: "75%", my: 2 }}>
       <CardMedia>
         <ResponsiveHeightContainer
-          element={<YouTubePlayer videoId={id} />}
+          element={videoMap[platform]}
           ratio={9 / 16}
         />
       </CardMedia>
       <CardContent>
         <EllipsisText text={title} variant="h6" />
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <EllipsisText
-            text={author}
-            variant="subtitle1"
-            color="text.secondary"
-          />
-          <Separator variant="subtitle1" color="text.secondary" />
-          <EllipsisText
-            text={`조회수 ${formatViewCount(viewCount)}회`}
-            variant="subtitle1"
-            color="text.secondary"
-          />
-          <Separator variant="subtitle1" color="text.secondary" />
-          <EllipsisText
-            text={timeAgo(publishedAt)}
-            variant="subtitle1"
-            color="text.secondary"
-          />
+          {textElementProps.map((text, index) => (
+            <React.Fragment key={index}>
+              <EllipsisText
+                text={text}
+                variant="subtitle1"
+                color="text.secondary"
+              />
+              {textElementProps.length - 1 > index && (
+                <Separator variant="subtitle1" color="text.secondary" />
+              )}
+            </React.Fragment>
+          ))}
           <Box sx={{ flexGrow: 1 }} />
-          <IconTextButton
-            size="small"
-            icon={<PlaylistAddIcon color="action" />}
-            text={
-              <Typography variant="subtitle2" color="text.secondary">
-                저장
-              </Typography>
-            }
-          />
-          <IconTextButton
-            size="small"
-            icon={<ReplyIcon color="action" />}
-            text={
-              <Typography variant="subtitle2" color="text.secondary">
-                공유
-              </Typography>
-            }
-          />
+          {iconTextButtonProps.map(({ text, icon }) => (
+            <IconTextButton
+              key={text}
+              size="small"
+              icon={icon}
+              text={
+                <Typography variant="subtitle2" color="text.secondary">
+                  {text}
+                </Typography>
+              }
+            />
+          ))}
         </Box>
         {tags ? <DisplayTags tags={tags} /> : null}
         <Divider sx={{ my: 1.5 }} />

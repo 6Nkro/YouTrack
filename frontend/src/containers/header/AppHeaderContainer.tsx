@@ -1,7 +1,6 @@
-import React from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
-import { toggleSideBar } from "../../redux/slices/commonSlice";
+import { AppDispatch } from "../../store/store";
+import { toggleSideBar } from "../../store/slices/commonSlice";
 import AppHeader from "../../components/header/AppHeader";
 
 export const AppHeaderContainer = () => {

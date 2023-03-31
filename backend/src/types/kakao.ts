@@ -1,4 +1,5 @@
 export interface KakaoItem {
+  id: number;
   channel: KakaoChannel;
   clip: KakaoClip;
 }
@@ -8,7 +9,6 @@ interface KakaoChannel {
 }
 
 interface KakaoClip {
-  id: number;
   title: string;
   description: string;
   duration: number;

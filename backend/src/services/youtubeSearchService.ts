@@ -4,8 +4,12 @@ import {
   YouTubeApiParams,
   YouTubeDetailParts,
   YouTubeSearchParts,
-} from "../../../types/youtube";
-import { CommonVideoData, CommonVideoDataList } from "../../../types/video";
+} from "../types/youtube";
+import {
+  CommonVideoData,
+  CommonVideoDataList,
+  Platform,
+} from "../../../types/common";
 
 const baseUrl = "https://www.googleapis.com/youtube/v3";
 const type = "video";
@@ -30,7 +34,8 @@ async function fetchYouTubeData<T>(
 
 export async function processYouTubeData(
   q: string,
-  pageToken: string
+  pageToken: string,
+  platform: Platform
 ): Promise<CommonVideoDataList> {
   const isEmptyQuery = q === "";
   const isFirstPage = pageToken === "";
@@ -78,6 +83,7 @@ export async function processYouTubeData(
       publishedAt,
       viewCount,
       description,
+      platform,
       tags,
     };
   });
