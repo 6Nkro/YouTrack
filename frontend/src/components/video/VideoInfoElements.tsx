@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { Box, Typography, styled, Button } from "@mui/material";
 import CustomScrollbar from "../commons/CustomScrollBar";
 
@@ -46,14 +46,20 @@ const DurationBox = styled(Box)({
 interface ActionButtonProps {
   text: string;
   icon: React.ReactElement;
+  onClick: MouseEventHandler<HTMLElement>;
 }
 
-export const ActionButton: React.FC<ActionButtonProps> = ({ text, icon }) => (
+export const ActionButton: React.FC<ActionButtonProps> = ({
+  text,
+  icon,
+  onClick,
+}) => (
   <Button
     startIcon={icon}
     variant="text"
     size="small"
     sx={{ textTransform: "none" }}
+    onClick={onClick}
   >
     <Typography variant="subtitle2" color="text.secondary">
       {text}

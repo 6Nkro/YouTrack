@@ -1,15 +1,26 @@
-export const formatViewCount = (viewCount: number | string) => {
+export const formatViewCount = (viewCount: number | string): string => {
   viewCount = +viewCount;
-  const units = ["", "만", "억"];
-  const filterToFixed = (n: number) => (n < 100 ? n.toFixed(1) : n.toFixed(0));
 
-  let unitIndex = 0;
-  while (viewCount >= 10000 && unitIndex < units.length - 1) {
-    viewCount /= 10000;
-    unitIndex++;
+  if (viewCount < 1000) {
+    return viewCount.toString();
   }
 
-  return `${filterToFixed(viewCount).replace(/\.0$/, "")}${units[unitIndex]}`;
+  const units = ["", "천", "만", "억"];
+  const format = (n: number, showDecimal: boolean) =>
+    showDecimal ? n.toFixed(1).replace(/\.0$/, "") : n.toFixed(0);
+
+  let unitIndex = 0;
+  let divisor = 1000;
+
+  while (viewCount >= divisor && unitIndex < units.length - 1) {
+    viewCount /= divisor;
+    unitIndex++;
+
+    divisor = unitIndex === 1 ? 10 : 10000;
+  }
+
+  const showDecimal = unitIndex === 1 || viewCount < 100;
+  return `${format(viewCount, showDecimal)}${units[unitIndex]}`;
 };
 
 export const formatYouTubeDuration = (duration: string) => {

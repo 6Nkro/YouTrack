@@ -1,4 +1,4 @@
-import { CommonState } from "../types/state";
+import { CommonState, PlayListState } from "../types/state";
 
 export const saveCommonStateToLocal = (state: CommonState) => {
   try {
@@ -14,6 +14,24 @@ export const loadCommonStateFromLocal = (): CommonState | undefined => {
     return commonState ? JSON.parse(commonState) : undefined;
   } catch (error) {
     console.error("Error loading commonState from local storage:", error);
+    return undefined;
+  }
+};
+
+export const savePlayListStateToLocal = (state: PlayListState) => {
+  try {
+    localStorage.setItem("playListState", JSON.stringify(state));
+  } catch (error) {
+    console.error("Error saving PlayListState to local storage:", error);
+  }
+};
+
+export const loadPlayListStateFromLocal = (): PlayListState | undefined => {
+  try {
+    const playListState = localStorage.getItem("playListState");
+    return playListState ? JSON.parse(playListState) : undefined;
+  } catch (error) {
+    console.error("Error loading PlayListState from local storage:", error);
     return undefined;
   }
 };

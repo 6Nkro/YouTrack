@@ -7,19 +7,24 @@ import {
 } from "../../../types/common";
 import { formatDurationBySeconds, formatViewCount } from "../utils/formatData";
 
+const baseUrl = "https://tv.kakao.com/api/v1/ft/";
 const sort = "Score";
 const fulllevels = "list";
 const fields = "-user,-clipChapterThumbnailList";
 const size = 20;
 
-async function fetchKakaoData(q: string, page: string): Promise<KakaoItem[]> {
-  const url = "https://tv.kakao.com/api/v1/ft/search/cliplinks";
+async function fetchKakaoData(
+  endpoint: string,
+  q: string,
+  page: string
+): Promise<KakaoItem[]> {
+  const url = `${baseUrl}/${endpoint}`;
   const params = { q, sort, fulllevels, fields, size, page };
   try {
     const res = await axios.get(url, { params });
     return res.data.list;
   } catch (error) {
-    console.error("Error in fetchYouTubeData:", error);
+    console.error("Error in fetchKakaoData:", error);
     return [];
   }
 }
@@ -29,10 +34,12 @@ export async function processKakaoData(
   page: string,
   platform: Platform
 ): Promise<CommonVideoDataList> {
-  page = page === "" ? "1" : page;
-  const searchData = await fetchKakaoData(q, page);
+  const isEmptyQuery = q === "";
+  const endpoint = isEmptyQuery ? "home/category/original" : "search/cliplinks";
+  const searchData = await fetchKakaoData(endpoint, q, page);
 
-  const nextPageToken = +page + 1;
+  const nextPageToken = +page + 1 || 2;
+
   const items = searchData.map((item): CommonVideoData => {
     const {
       title,

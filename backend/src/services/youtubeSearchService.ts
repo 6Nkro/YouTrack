@@ -23,7 +23,6 @@ async function fetchYouTubeData<T>(
   params: YouTubeApiParams
 ): Promise<T | ErrorFetchYouTube> {
   const url = `${baseUrl}/${endpoint}`;
-
   try {
     const res = await axios.get(url, { params });
     return res.data;

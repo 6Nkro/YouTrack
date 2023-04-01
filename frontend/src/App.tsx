@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useSelector } from "react-redux";
-import { RootState } from "./store/store";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { GlobalStyles, CssBaseline, Box } from "@mui/material";
+import { SnackbarProvider } from "notistack";
+import { RootState } from "./store/store";
+
 import AppHeaderContainer from "./containers/header/AppHeaderContainer";
 import SideBarContainer from "./containers/sideBar/SideBarContainer";
 import HomeContainer from "./containers/home/HomeContainer";
@@ -23,20 +25,22 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <Box sx={{ display: "flex" }}>
-          <GlobalStyles styles={{ body: { overflowY: "scroll" } }} />
-          <CssBaseline />
-          <Router>
-            <AppHeaderContainer />
-            <SideBarContainer />
-            <Box sx={{ pt: 8, flexGrow: 1 }}>
-              <Routes>
-                <Route path="/" element={<HomeContainer />} />
-                <Route path="/playlist" element={<PlayListContainer />} />
-              </Routes>
-            </Box>
-          </Router>
-        </Box>
+        <SnackbarProvider maxSnack={3}>
+          <Box sx={{ display: "flex" }}>
+            <GlobalStyles styles={{ body: { overflowY: "scroll" } }} />
+            <CssBaseline />
+            <Router>
+              <AppHeaderContainer />
+              <SideBarContainer />
+              <Box sx={{ pt: 8, flexGrow: 1 }}>
+                <Routes>
+                  <Route path="/" element={<HomeContainer />} />
+                  <Route path="/playlist" element={<PlayListContainer />} />
+                </Routes>
+              </Box>
+            </Router>
+          </Box>
+        </SnackbarProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

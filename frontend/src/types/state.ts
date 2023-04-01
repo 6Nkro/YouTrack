@@ -1,4 +1,4 @@
-import { Platform } from "../../../types/common";
+import { CommonVideoData, Platform } from "../../../types/common";
 
 export interface CommonState {
   nightMode: boolean;
@@ -8,4 +8,8 @@ export interface CommonState {
 export interface SearchState {
   query: string;
   platform: Platform;
+}
+
+export interface PlayListState {
+  items: CommonVideoData[];
 }

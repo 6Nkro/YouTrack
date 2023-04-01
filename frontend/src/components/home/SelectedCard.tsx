@@ -18,21 +18,29 @@ import { timeAgo, formatKakaoVideoUrl } from "../../utils/formatData";
 import { ActionButton, TagsScrollbar } from "../video/VideoInfoElements";
 import VideoPlayerContainer from "../../containers/video/VideoPlayerContainer";
 import { YouTubePlayer, CommonVideoPlayer } from "../video/VideoPlayers";
-import { CommonVideoData, Platform } from "../../../../types/common";
+import { CommonVideoData } from "../../../../types/common";
 
 interface SelectedCardProps {
   video: CommonVideoData;
-  platform: Platform;
   onTagClick: (tag: string) => void;
+  onSaveClick: (video: CommonVideoData) => void;
 }
 
 const SelectedCard: React.FC<SelectedCardProps> = ({
   video,
-  platform,
   onTagClick,
+  onSaveClick,
 }) => {
-  const { id, title, author, viewCount, publishedAt, description, tags } =
-    video;
+  const {
+    id,
+    title,
+    author,
+    viewCount,
+    publishedAt,
+    description,
+    tags,
+    platform,
+  } = video;
 
   const textElementProps = [
     author,
@@ -41,18 +49,22 @@ const SelectedCard: React.FC<SelectedCardProps> = ({
   ];
 
   const actionButtonProps = [
-    { text: "저장", icon: <PlaylistAddIcon color="action" /> },
-    { text: "공유", icon: <ReplyIcon color="action" /> },
+    {
+      text: "저장",
+      icon: <PlaylistAddIcon color="action" />,
+      onClick: () => onSaveClick(video),
+    },
+    { text: "공유", icon: <ReplyIcon color="action" />, onClick: () => false },
   ];
 
-  const videoMap = {
-    YouTube: <YouTubePlayer videoId={id} />,
-    kakao: <CommonVideoPlayer url={formatKakaoVideoUrl(id)} />,
+  const videoPlayerMap = {
+    YouTube: () => <YouTubePlayer videoId={id} />,
+    kakao: () => <CommonVideoPlayer url={formatKakaoVideoUrl(id)} />,
   };
 
-  const actionButtons = actionButtonProps.map(({ text, icon }) => (
+  const actionButtons = actionButtonProps.map(({ text, icon, onClick }) => (
     <React.Fragment key={text}>
-      <ActionButton text={text} icon={icon} />
+      <ActionButton text={text} icon={icon} onClick={onClick} />
     </React.Fragment>
   ));
 
@@ -72,7 +84,10 @@ const SelectedCard: React.FC<SelectedCardProps> = ({
   return (
     <Card sx={{ width: "75%", my: 2 }}>
       <CardMedia>
-        <VideoPlayerContainer element={videoMap[platform]} ratio={9 / 16} />
+        <VideoPlayerContainer
+          element={videoPlayerMap[platform]()}
+          ratio={9 / 16}
+        />
       </CardMedia>
       <CardContent>
         <EllipsisText variant="h6">{title}</EllipsisText>
