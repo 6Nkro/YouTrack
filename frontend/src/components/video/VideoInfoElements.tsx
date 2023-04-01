@@ -1,41 +1,69 @@
 import React from "react";
-import { Chip } from "@mui/material";
+import { Box, Typography, styled, Button } from "@mui/material";
 import CustomScrollbar from "../commons/CustomScrollBar";
 
 interface ThumbNailProps {
   url: string;
   title: string;
+  duration: string;
 }
 
-export const ThumbNail: React.FC<ThumbNailProps> = ({ url, title }) => (
-  <img
-    src={url}
-    alt={title}
-    style={{
-      width: 240,
-      height: 160,
-    }}
-  />
+export const ThumbNail: React.FC<ThumbNailProps> = ({
+  url,
+  title,
+  duration,
+}) => {
+  return (
+    <>
+      <ThumbNailImage src={url} alt={title} />
+      <DurationOverlay duration={duration} />
+    </>
+  );
+};
+
+const ThumbNailImage = styled("img")({
+  width: 240,
+  height: 160,
+});
+
+const DurationOverlay: React.FC<{ duration: string }> = ({ duration }) => (
+  <DurationBox>
+    <Typography variant="caption" color="white">
+      {duration}
+    </Typography>
+  </DurationBox>
 );
 
-export const DisplayTags: React.FC<{ tags: string[] }> = ({ tags }) => (
-  <CustomScrollbar
-    sx={{
-      display: "flex",
-      overflowX: "auto",
-      whiteSpace: "nowrap",
-      my: 1,
-      pb: 1.5,
-    }}
+const DurationBox = styled(Box)({
+  position: "absolute",
+  bottom: 0,
+  right: 0,
+  backgroundColor: "rgba(0, 0, 0, 0.7)",
+  borderRadius: "8px 0 0 0",
+  padding: "2px 8px 0px 8px",
+});
+
+interface ActionButtonProps {
+  text: string;
+  icon: React.ReactElement;
+}
+
+export const ActionButton: React.FC<ActionButtonProps> = ({ text, icon }) => (
+  <Button
+    startIcon={icon}
+    variant="text"
+    size="small"
+    sx={{ textTransform: "none" }}
   >
-    {tags.map(tag => (
-      <Chip
-        key={tag}
-        label={tag}
-        sx={{
-          mr: 1,
-        }}
-      />
-    ))}
-  </CustomScrollbar>
+    <Typography variant="subtitle2" color="text.secondary">
+      {text}
+    </Typography>
+  </Button>
 );
+
+export const TagsScrollbar = styled(CustomScrollbar)({
+  display: "flex",
+  overflowX: "auto",
+  whiteSpace: "nowrap",
+  padding: "8px 0 12px 0",
+});

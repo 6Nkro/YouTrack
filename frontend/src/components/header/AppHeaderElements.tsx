@@ -1,16 +1,22 @@
-import React, { MouseEventHandler } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { MouseEventHandler, ReactElement } from "react";
 import {
-  useTheme,
+  Theme,
   InputBase,
+  styled,
+  AppBar,
   IconButton,
   Paper,
   Typography,
+  Button,
 } from "@mui/material";
-import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { IconTextButton } from "../commons/CustomButtons";
+
+export const HeaderAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  color: theme.palette.mode === "dark" ? undefined : "grey",
+  backgroundColor: theme.palette.mode === "dark" ? undefined : "white",
+}));
 
 interface HamburgerProps {
   onClick: MouseEventHandler<HTMLElement>;
@@ -25,34 +31,33 @@ export const Hamburger: React.FC<HamburgerProps> = ({ onClick }) => (
   />
 );
 
-export const AppTitle: React.FC<{ text: string }> = ({ text }) => {
-  const navigate = useNavigate();
-  const textColor = useTheme().palette.mode === "dark" ? "white" : "black";
-  const textElement = (
-    <Typography
-      variant="h6"
-      sx={{
-        color: textColor,
-        fontWeight: "600",
-      }}
-    >
-      {text}
-    </Typography>
-  );
+interface AppTitleProps {
+  text: string;
+  icon: ReactElement;
+  onClick: MouseEventHandler<HTMLElement>;
+}
 
-  return (
-    <IconTextButton
-      icon={<VideoLibraryIcon sx={{ color: "red" }} />}
-      text={textElement}
-      onClick={() => navigate("/")}
-    />
-  );
-};
+export const AppTitle: React.FC<AppTitleProps> = ({ text, icon, onClick }) => (
+  <Button
+    startIcon={icon}
+    variant="text"
+    size="small"
+    sx={{ textTransform: "none" }}
+    onClick={onClick}
+  >
+    <TitleText variant="h6">{text}</TitleText>
+  </Button>
+);
+
+const TitleText = styled(Typography)(({ theme }: { theme: Theme }) => ({
+  color: theme.palette.mode === "dark" ? "white" : "black",
+  fontWeight: 600,
+}));
 
 interface SearchBarProps {
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  onSearch: () => void;
+  onSearch: React.FormEventHandler<HTMLFormElement>;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
@@ -60,24 +65,19 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onChange,
 }) => {
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = event => {
-    event.preventDefault();
-    onSearch();
-  };
-
   return (
     <Paper
       component="form"
-      onSubmit={handleSubmit}
+      onSubmit={onSearch}
       sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 640 }}
     >
       <InputBase
-        sx={{ ml: 1, flex: 1 }}
+        sx={{ p: 1, flex: 1 }}
         placeholder="Search"
         value={value}
         onChange={onChange}
       />
-      <IconButton type="submit" sx={{ p: "10px" }}>
+      <IconButton type="submit" sx={{ p: 1 }}>
         <SearchIcon />
       </IconButton>
     </Paper>

@@ -1,18 +1,28 @@
 import React, { useState } from "react";
-import { Box, Button, Collapse, Typography } from "@mui/material";
-import { Variant } from "@mui/material/styles/createTypography";
+import {
+  Typography,
+  styled,
+  Box,
+  Button,
+  Collapse,
+  TypographyProps,
+} from "@mui/material";
 
 interface SeparatorProps {
-  mx?: number;
-  color?: string;
-  variant?: Variant | "inherit";
+  margin?: number;
+  variant?: TypographyProps["variant"];
+  color?: TypographyProps["color"];
 }
 
-export const Separator: React.FC<SeparatorProps> = ({ mx, color, variant }) => (
+export const Separator: React.FC<SeparatorProps> = ({
+  margin,
+  variant,
+  color,
+}) => (
   <Typography
     variant={variant || "inherit"}
     color={color || "inherit"}
-    sx={{ mx: mx || 1 }}
+    sx={{ mx: margin || 1 }}
   >
     |
   </Typography>
@@ -21,53 +31,61 @@ export const Separator: React.FC<SeparatorProps> = ({ mx, color, variant }) => (
 interface LineClampTextProps {
   text: string;
   lineClamp: number;
-  color?: string;
-  variant?: Variant | "inherit";
+  variant?: TypographyProps["variant"];
+  color?: TypographyProps["color"];
 }
 
 export const LineClampText: React.FC<LineClampTextProps> = ({
   text,
-  color,
   lineClamp,
   variant,
+  color,
 }) => (
-  <Typography
-    variant={variant || "inherit"}
-    color={color || "inherit"}
-    sx={{
-      display: "-webkit-box",
-      WebkitLineClamp: lineClamp,
-      WebkitBoxOrient: "vertical",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-    }}
-  >
+  <Typography variant={variant} color={color} sx={setLineClamp(lineClamp)}>
     {text}
   </Typography>
 );
 
-interface EllipsisTextProps {
-  text: string;
-  color?: string;
-  variant?: Variant | "inherit";
+const setLineClamp = (lineClamp: number) => ({
+  display: "-webkit-box",
+  WebkitLineClamp: lineClamp,
+  WebkitBoxOrient: "vertical",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+});
+
+export const EllipsisText = styled(Typography)({
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+});
+
+interface TextWithSeparatorProps {
+  texts: string[];
+  variant?: TypographyProps["variant"];
+  color?: TypographyProps["color"];
 }
 
-export const EllipsisText: React.FC<EllipsisTextProps> = ({
-  text,
-  color,
+export const TextWithSeparator: React.FC<TextWithSeparatorProps> = ({
+  texts,
   variant,
+  color,
 }) => (
-  <Typography
-    variant={variant || "inherit"}
-    color={color || "inherit"}
-    sx={{
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    }}
-  >
-    {text}
-  </Typography>
+  <>
+    {texts.map((text, index) => (
+      <React.Fragment key={index}>
+        <EllipsisText variant={variant || "inherit"} color={color || "inherit"}>
+          {text}
+        </EllipsisText>
+        {texts.length - 1 > index && (
+          <Separator
+            variant={variant || "inherit"}
+            color={color || "inherit"}
+          />
+        )}
+      </React.Fragment>
+    ))}
+  </>
 );
 
 interface ExpendableTextProps {
@@ -86,20 +104,20 @@ export const ExpendableText: React.FC<ExpendableTextProps> = ({ text }) => {
       <Collapse in={isExpanded}>
         <Typography sx={{ p: 1, whiteSpace: "pre-line" }}>{text}</Typography>
       </Collapse>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-          mt: 1,
-        }}
-      >
+      <ExpendButtonBox>
         <Button variant="text" onClick={handleExpandToggle}>
           {isExpanded ? "숨기기" : "내용 보기"}
         </Button>
-      </Box>
+      </ExpendButtonBox>
     </>
   );
 };
+
+const ExpendButtonBox = styled(Box)({
+  display: "flex",
+  justifyContent: "center",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  marginTop: 1,
+});

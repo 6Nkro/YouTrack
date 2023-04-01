@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { SearchBar } from "../../components/header/AppHeaderElements";
 import { useDispatch } from "react-redux";
 import { setQuery } from "../../store/slices/searchSlice";
+import { SearchBar } from "../../components/header/AppHeaderElements";
 
 const SearchBarContainer = () => {
   const [value, setValue] = useState("");
 
   const dispatch = useDispatch();
-  const handleSearch = () => {
+  const handleSearch: React.FormEventHandler<HTMLFormElement> = event => {
+    event.preventDefault();
     dispatch(setQuery(value));
   };
 

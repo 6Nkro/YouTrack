@@ -5,7 +5,7 @@ interface ResponsiveHeightContainerProps {
   ratio: number;
 }
 
-const ResponsiveHeightContainer: React.FC<ResponsiveHeightContainerProps> = ({
+const VideoPlayerContainer: React.FC<ResponsiveHeightContainerProps> = ({
   element,
   ratio,
 }) => {
@@ -37,4 +37,4 @@ const ResponsiveHeightContainer: React.FC<ResponsiveHeightContainerProps> = ({
   return <div ref={containerRef}>{updatedElement}</div>;
 };
 
-export default ResponsiveHeightContainer;
+export default VideoPlayerContainer;

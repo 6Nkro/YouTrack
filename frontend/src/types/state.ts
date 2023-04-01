@@ -1,3 +1,5 @@
+import { Platform } from "../../../types/common";
+
 export interface CommonState {
   nightMode: boolean;
   sideBar: boolean;
@@ -5,5 +7,5 @@ export interface CommonState {
 
 export interface SearchState {
   query: string;
-  platform: "YouTube" | "kakao";
+  platform: Platform;
 }

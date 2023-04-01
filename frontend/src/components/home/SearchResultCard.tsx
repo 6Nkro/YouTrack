@@ -10,9 +10,9 @@ import { ThumbNail } from "../video/VideoInfoElements";
 import {
   LineClampText,
   EllipsisText,
-  Separator,
+  TextWithSeparator,
 } from "../commons/CustomTypographys";
-import { timeAgo, formatViewCount } from "../../utils/formatData";
+import { timeAgo } from "../../utils/formatData";
 import { CommonVideoData } from "../../../../types/common";
 
 interface YouTubeSearchResultCardProps {
@@ -24,35 +24,29 @@ const SearchResultCard: React.FC<YouTubeSearchResultCardProps> = ({
   video,
   onClick,
 }) => {
-  const { thumbnail, title, publishedAt, viewCount, author } = video;
+  const { thumbnail, title, duration, publishedAt, viewCount, author } = video;
+
+  const textElementProps = [`조회수 ${viewCount}회`, timeAgo(publishedAt)];
 
   return (
     <Card sx={{ width: "75%", my: 1, boxShadow: "none" }} onClick={onClick}>
       <CardActionArea>
         <Box sx={{ display: "flex" }}>
-          <CardMedia>
-            <ThumbNail url={thumbnail} title={title} />
+          <CardMedia sx={{ position: "relative", width: 240, height: 160 }}>
+            <ThumbNail url={thumbnail} title={title} duration={duration} />
           </CardMedia>
           <CardContent sx={{ pt: 1 }}>
-            <LineClampText variant="h6" text={title} lineClamp={2} />
+            <LineClampText variant="h6" lineClamp={2} text={title} />
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <EllipsisText
-                text={`조회수 ${formatViewCount(viewCount)}회`}
-                variant="subtitle2"
-                color="text.secondary"
-              />
-              <Separator />
-              <EllipsisText
-                text={timeAgo(publishedAt)}
+              <TextWithSeparator
+                texts={textElementProps}
                 variant="subtitle2"
                 color="text.secondary"
               />
             </Box>
-            <EllipsisText
-              text={author}
-              variant="subtitle1"
-              color="text.secondary"
-            />
+            <EllipsisText variant="subtitle2" color="text.secondary">
+              {author}
+            </EllipsisText>
           </CardContent>
         </Box>
       </CardActionArea>

@@ -10,6 +10,7 @@ import {
   CommonVideoDataList,
   Platform,
 } from "../../../types/common";
+import { formatViewCount, formatYouTubeDuration } from "../utils/formatData";
 
 const baseUrl = "https://www.googleapis.com/youtube/v3";
 const type = "video";
@@ -77,11 +78,11 @@ export async function processYouTubeData(
     return {
       id: ids[index],
       thumbnail: searchPart.snippet.thumbnails.medium.url,
-      duration,
+      duration: formatYouTubeDuration(duration),
       author: channelTitle,
       title,
       publishedAt,
-      viewCount,
+      viewCount: formatViewCount(viewCount),
       description,
       platform,
       tags,

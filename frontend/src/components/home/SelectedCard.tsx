@@ -5,89 +5,87 @@ import {
   CardMedia,
   Box,
   Divider,
-  Typography,
+  Chip,
 } from "@mui/material";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import ReplyIcon from "@mui/icons-material/Reply";
 import {
   EllipsisText,
-  Separator,
   ExpendableText,
+  TextWithSeparator,
 } from "../commons/CustomTypographys";
-import {
-  timeAgo,
-  formatViewCount,
-  formatKakaoVideoUrl,
-} from "../../utils/formatData";
-import { DisplayTags } from "../video/VideoInfoElements";
-import { IconTextButton } from "../commons/CustomButtons";
-import ResponsiveHeightContainer from "../../containers/commons/ResponsiveHeightContainer";
+import { timeAgo, formatKakaoVideoUrl } from "../../utils/formatData";
+import { ActionButton, TagsScrollbar } from "../video/VideoInfoElements";
+import VideoPlayerContainer from "../../containers/video/VideoPlayerContainer";
 import { YouTubePlayer, CommonVideoPlayer } from "../video/VideoPlayers";
 import { CommonVideoData, Platform } from "../../../../types/common";
 
 interface SelectedCardProps {
   video: CommonVideoData;
   platform: Platform;
+  onTagClick: (tag: string) => void;
 }
 
-const SelectedCard: React.FC<SelectedCardProps> = ({ video, platform }) => {
+const SelectedCard: React.FC<SelectedCardProps> = ({
+  video,
+  platform,
+  onTagClick,
+}) => {
   const { id, title, author, viewCount, publishedAt, description, tags } =
     video;
+
+  const textElementProps = [
+    author,
+    `조회수 ${viewCount}회`,
+    timeAgo(publishedAt),
+  ];
+
+  const actionButtonProps = [
+    { text: "저장", icon: <PlaylistAddIcon color="action" /> },
+    { text: "공유", icon: <ReplyIcon color="action" /> },
+  ];
 
   const videoMap = {
     YouTube: <YouTubePlayer videoId={id} />,
     kakao: <CommonVideoPlayer url={formatKakaoVideoUrl(id)} />,
   };
 
-  const textElementProps = [
-    author,
-    `조회수 ${formatViewCount(viewCount)}회`,
-    timeAgo(publishedAt),
-  ];
+  const actionButtons = actionButtonProps.map(({ text, icon }) => (
+    <React.Fragment key={text}>
+      <ActionButton text={text} icon={icon} />
+    </React.Fragment>
+  ));
 
-  const iconTextButtonProps = [
-    { text: "저장", icon: <PlaylistAddIcon color="action" /> },
-    { text: "공유", icon: <ReplyIcon color="action" /> },
-  ];
+  const displayTags = tags && (
+    <TagsScrollbar>
+      {tags.map(tag => (
+        <Chip
+          key={tag}
+          label={tag}
+          sx={{ mr: 1 }}
+          onClick={() => onTagClick(tag)}
+        />
+      ))}
+    </TagsScrollbar>
+  );
 
   return (
     <Card sx={{ width: "75%", my: 2 }}>
       <CardMedia>
-        <ResponsiveHeightContainer
-          element={videoMap[platform]}
-          ratio={9 / 16}
-        />
+        <VideoPlayerContainer element={videoMap[platform]} ratio={9 / 16} />
       </CardMedia>
       <CardContent>
-        <EllipsisText text={title} variant="h6" />
+        <EllipsisText variant="h6">{title}</EllipsisText>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          {textElementProps.map((text, index) => (
-            <React.Fragment key={index}>
-              <EllipsisText
-                text={text}
-                variant="subtitle1"
-                color="text.secondary"
-              />
-              {textElementProps.length - 1 > index && (
-                <Separator variant="subtitle1" color="text.secondary" />
-              )}
-            </React.Fragment>
-          ))}
+          <TextWithSeparator
+            texts={textElementProps}
+            variant="subtitle1"
+            color="text.secondary"
+          />
           <Box sx={{ flexGrow: 1 }} />
-          {iconTextButtonProps.map(({ text, icon }) => (
-            <IconTextButton
-              key={text}
-              size="small"
-              icon={icon}
-              text={
-                <Typography variant="subtitle2" color="text.secondary">
-                  {text}
-                </Typography>
-              }
-            />
-          ))}
+          {actionButtons}
         </Box>
-        {tags ? <DisplayTags tags={tags} /> : null}
+        {displayTags}
         <Divider sx={{ my: 1.5 }} />
         <ExpendableText text={description} />
       </CardContent>

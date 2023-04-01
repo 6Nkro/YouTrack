@@ -1,20 +1,33 @@
-import { Box } from "@mui/material";
-import PlatformButtonsContainer from "./PlatformButtonsContainer";
 import SearchResultContainer from "./SearchResultContainer";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { setPlatform } from "../../store/slices/searchSlice";
+import {
+  HomeBox,
+  PlatformButton,
+  PlatformButtonGroup,
+} from "../../components/home/HomeElements";
 
 const HomeContainer = () => {
-  return (
-    <Box
-      component="main"
-      sx={{
-        display: "grid",
-        placeItems: "center",
-        p: 3,
-      }}
+  const platforms = ["YouTube", "kakao"];
+
+  const dispatch = useDispatch<AppDispatch>();
+  const platformButtons = platforms.map(platform => (
+    <PlatformButton
+      key={platform}
+      onClick={() => dispatch(setPlatform(platform))}
     >
-      <PlatformButtonsContainer />
+      {platform}
+    </PlatformButton>
+  ));
+
+  return (
+    <HomeBox component="main">
+      <PlatformButtonGroup color="info" size="large">
+        {platformButtons}
+      </PlatformButtonGroup>
       <SearchResultContainer />
-    </Box>
+    </HomeBox>
   );
 };
 

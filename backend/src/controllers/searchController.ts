@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { processKakaoData } from "../services/kakaoSearchService";
 import { processYouTubeData } from "../services/youtubeSearchService";
-
-type Platform = "YouTube" | "kakao";
+import { Platform } from "../../../types/common";
 
 export async function searchVideosByPlatform(req: Request, res: Response) {
   try {

@@ -5,6 +5,7 @@ import {
   CommonVideoDataList,
   Platform,
 } from "../../../types/common";
+import { formatDurationBySeconds, formatViewCount } from "../utils/formatData";
 
 const sort = "Score";
 const fulllevels = "list";
@@ -46,11 +47,11 @@ export async function processKakaoData(
     return {
       id: item.id.toString(),
       thumbnail: thumbnailUrl,
-      duration: duration.toString(),
+      duration: formatDurationBySeconds(duration),
       author: item.channel.name,
       title,
       publishedAt: createTime,
-      viewCount: playCount,
+      viewCount: formatViewCount(playCount),
       description,
       platform,
       tags: tagList,
